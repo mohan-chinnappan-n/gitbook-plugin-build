@@ -56,7 +56,9 @@ class Helper {
 	}
 
 	getOutput(...paths) {
-		return this.getSrc(...paths)
+		return this.getSrc(
+			this.getRelOutput(...paths)
+		)
 	}
 
 	getRelOutput(...paths) {

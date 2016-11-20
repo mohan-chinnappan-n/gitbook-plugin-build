@@ -36,7 +36,7 @@ module.exports = argv.pandoc !== true ? {} : {
 
             helper.writeOutput(
             	mainPath,
-				helper.renderTemp("main", {summary})
+				helper.renderTemp("main", {summary: summary})
 			);
 		},
 		'page:before': function (page) {

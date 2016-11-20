@@ -55,15 +55,14 @@ class Helper {
 		)
 	}
 
-	getOutput(...paths) {
-		return this.getSrc(
-			this.getRelOutput(...paths)
-		)
+	getRelOutput(...paths) {
+		const outputPath = this.getOutput();
+		return this.getRelOutput(...paths).replace( outputPath, '' );
 	}
 
-	getRelOutput(...paths) {
+	getOutput(...paths) {
 		const fileObj = path.parse(
-			this.config.output.path, ...paths
+			this.getSrc(this.config.output.path, ...paths)
 		);
 		return `${fileObj.dir}/${fileObj.name}${fileObj.ext ? this.config.output.ext : ''}`;
 	}

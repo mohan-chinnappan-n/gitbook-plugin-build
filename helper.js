@@ -56,8 +56,7 @@ class Helper {
 	}
 
 	getRelOutput(...paths) {
-		const outputPath = this.getOutput();
-		return this.getRelOutput(...paths).replace( outputPath, '' );
+		return this.getOutput(...paths).replace( `${this.getOutput()}/`, '' );
 	}
 
 	getOutput(...paths) {

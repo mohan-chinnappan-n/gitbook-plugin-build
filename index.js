@@ -22,6 +22,7 @@ module.exports = argv.pandoc !== true ? {} : {
 			this.book.summary.walk((article) => {
                 summary.push(
                 	merge.recursive( article,{
+                		srcPath : article.path,
                 		path : helper.getRelOutput(article.path)
 					})
 				)

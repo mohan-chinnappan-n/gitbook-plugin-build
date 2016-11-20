@@ -5,15 +5,16 @@ const fse = require('fs-extra');
 const fs = require('fs');
 const path = require('path');
 const pdc = require('pdc');
+const assert = require('assert');
+const ejs = require('ejs');
 
 class Helper {
 
-	static getPandocType(filePath) {
-		const fileObj = path.parse(filePath);
+	static getFileLang(filePath) {
 		return {
 			'.md': 'markdown',
 			'.adoc': 'asciidoc'
-		}[fileObj.ext]
+		}[path.parse(filePath).ext]
 	}
 
 	constructor() {
@@ -23,12 +24,17 @@ class Helper {
 	}
 
 	init(ctx) {
+		// Set labels
 		this._srcResolve = ctx.book.resolve;
 		this.log = ctx.log;
 		this.config = merge.recursive({
 			"bin": "pandoc",
 			"args": [],
 			"opts": {},
+			"templates": {
+				"main": "_layouts/main.tex",
+				"content": "_layouts/content.tex"
+			},
 			"output": {
 				"path": "../build/book/latex",
 				"format": "latex",
@@ -36,13 +42,28 @@ class Helper {
 				"main": "main"
 			}
 		}, ctx.options.pluginsConfig.pandoc);
+
+		// Test labels
+		const re = new RegExp("^[a-zA-Z-._d,s]+$");
+		assert(re.test(this.config.output.main), `pandoc.output.main: does not match pattern "${re.source}"`);
+	}
+
+	renderTemp(name,config){
+		return ejs.render(
+			fs.readFileSync(this.getSrc(this.config.templates[name]),'utf-8'),
+			config
+		)
 	}
 
 	getOutput(...paths) {
+		return this.getSrc(...paths)
+	}
+
+	getRelOutput(...paths) {
 		const fileObj = path.parse(
-			this.getSrc(this.config.output.path, ...paths)
+			this.config.output.path, ...paths
 		);
-		return `${fileObj.dir}/${fileObj.name}${fileObj.ext}`;
+		return `${fileObj.dir}/${fileObj.name}${fileObj.ext ? this.config.output.ext : ''}`;
 	}
 
 	getSrc(...paths) {
@@ -51,20 +72,20 @@ class Helper {
 		);
 	}
 
-	getOutputMain() {
-		return this.getOutput(`${this.config.output.main}.${this.config.output.ext}`);
+	getMainFile() {
+		return `./${this.config.output.main}${this.config.output.ext}`;
 	}
 
 	writeOutput(filePath, content) {
 		const self = this;
+		const outputPath = this.getOutput(filePath);
 
-		const fileObj = path.parse(filePath);
+		this.log.debug('padoc(build file):', outputPath);
 
-		this.log.debug('padoc(build file):', this.getOutput(filePath));
-		fse.mkdirp(filePath, (err) => {
+		fse.mkdirp(path.parse(outputPath).dir, (err) => {
 			if (err) return self.log.error(err.message);
 
-			fse.outputFile(self.getOutput(fileObj.dir, `${fileObj.name}${this.config.output.ext}`), content, (err) => {
+			fse.outputFile(outputPath, content, (err) => {
 				if (err) return self.log.error(err.message);
 			});
 		});
@@ -80,24 +101,32 @@ class Helper {
 	 * @param filePath relative path from src
 	 * @param cb
 	 */
-	pandocCompile(filePath, cb) {
+	pandocCompileFile(filePath, cb) {
 
 		const fromPath = this.getSrc(filePath);
 
 		fs.readFile(fromPath, 'utf-8', (err, data) => {
 			if (err) return cb(err);
 
-			pdc(data,
-				Helper.getPandocType(fromPath),
-				this.config.output.format,
-				this.config.args,
-				this.config.opts,
-				(err, result) => {
-					if (err) return cb(err);
+			this.pandocCompile(data, Helper.getFileLang(fromPath), (err, result) => {
+				if (err) return cb(err);
 
-					cb(null, result);
-				});
+				cb(null, result);
+			});
 		});
+	}
+
+	pandocCompile(string, srcLang, cb) {
+		pdc(string,
+			srcLang,
+			this.config.output.format,
+			this.config.args,
+			this.config.opts,
+			(err, result) => {
+				if (err) return cb(err);
+
+				cb(null, result);
+			});
 	}
 
 }

@@ -2,8 +2,8 @@
 
 const path = require('path');
 const fs = require('fs');
-const fse = require('fs-extra');
 const argv = require('yargs').argv;
+const merge = require('merge');
 
 const helper = require('./helper');
 
@@ -20,31 +20,35 @@ module.exports = argv.pandoc !== true ? {} : {
 
 			// Fill summary array.
 			this.book.summary.walk((article) => {
-                summary.push(article.path);
+                summary.push(
+                	merge.recursive( article,{
+                		path :
+					})
+				)
 			});
 		},
 		finish: function () {
 			const self = this;
-			const outMainPath = helper.getOutputMain();
-
-			// Construct main content
-			let mainContent = summary.join('\n');
+			const mainPath = helper.getMainFile();
 
 			// Write main file.
-			this.log.debug('padoc(build main file):', outMainPath);
-			fse.outputFile(outMainPath, mainContent, (err) => {
-					if (err) return self.log.error(err.message);
-					self.log.debug('pandoc(finish');
-				}
+			this.log.debug('padoc(build main file):', mainPath);
+
+            helper.writeOutput(
+            	mainPath,
+				helper.renderTemp("main", {summary})
 			);
 		},
 		'page:before': function (page) {
 			const self = this;
 
-			helper.pandocCompile(page.path, (err, result) => {
+			helper.pandocCompileFile(page.path, (err, content) => {
 				if (err) return self.log.error(err.message);
 
-				helper.writeOutput(page.path, result);
+				helper.writeOutput(
+					page.path,
+					helper.renderTemp("content", {content})
+				);
 			});
 		}
 	}

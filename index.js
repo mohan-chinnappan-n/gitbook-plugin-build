@@ -24,20 +24,20 @@ module.exports = argv.pandoc !== true ? {} : {
 			const self = this;
 			const outputPath = helper.getOutput();
 
-			// Log action
-			this.log.debug('padoc(build main file):', outputPath);
-
 			// Create output dir
 			mkdirp(path.parse(outputPath).dir, (err) => {
 				if (err) return self.log.error(err.message);
 
 				// Compile rendered main file
-				helper.pandocCompile(helper.renderTemp('main',{summary: summary}), (err, content) => {
+				helper.pandocCompile(helper.renderTemp({summary: summary}), (err, content) => {
 					if (err) return self.log.error(err.message);
 
 					// Write file to outputpath
 					fs.writeFile(outputPath, content, (err) => {
 						if (err) return self.log.error(err.message);
+
+						// Log action
+						this.log.info('Pandoc output:', helper.config.output.path);
 					});
 				});
 			});

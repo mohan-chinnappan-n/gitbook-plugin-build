@@ -23,10 +23,7 @@ class Helper {
 			"bin": "pandoc",
 			"args": [],
 			"opts": {},
-			"templates": {
-				"main": "_layouts/main.tex",
-				"content": "_layouts/content.tex"
-			},
+            "template": "_layouts/main.tex",
 			"output": {
 				"path": "../build/book/latex/main.tex",
 				"format": "latex"
@@ -38,15 +35,15 @@ class Helper {
 		assert(re.test(this.config.output.main), `pandoc.output.main: does not match pattern "${re.source}"`);
 	}
 
-	renderTemp(name, config) {
+	renderTemp(config) {
 		return ejs.render(
-			fs.readFileSync(this.getSrc(this.config.templates[name]), 'utf-8'),
+			fs.readFileSync(this.getSrc(this.config.template), 'utf-8'),
 			config
 		)
 	}
 
 	getOutput() {
-		return this.getSrc(this.config.output.path)
+		return this.getSrc(this.config.output.path);
 	}
 
 	pandocCompile(string, cb) {

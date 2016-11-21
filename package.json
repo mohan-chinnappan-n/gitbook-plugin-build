@@ -1,10 +1,10 @@
 {
-  "name": "gitbook-plugin-pandoc",
+  "name": "gitbook-plugin-build",
   "version": "0.0.1",
   "description": "Extends gitbook build system with pandoc converter.",
   "main": "src/index.js",
 	"license": "MIT",
-	"homepage": "https://urosjarc.github.io/gitbook-plugin-pandoc",
+	"homepage": "https://urosjarc.github.io/gitbook-plugin-build",
 	"author": {
 		"name": "Uroš Jarc",
 		"email": "jar.fmf@gmail.com",
@@ -12,10 +12,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/urosjarc/gitbook-plugin-pandoc"
+		"url": "https://github.com/urosjarc/gitbook-plugin-build"
 	},
 	"keywords": [
-		"gitbook", "plugin", "pandoc", "latex", "markdown", "book"
+		"gitbook", "plugin", "pandoc", "latex", "markdown", "book", "build"
 	],
 	"files": [
 		"src"

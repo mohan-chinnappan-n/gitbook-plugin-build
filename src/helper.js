@@ -20,11 +20,7 @@ class Helper {
 		// Set labels
 		this.getSrc = ctx.book.resolve;
 		this.log = ctx.log;
-		this.config = merge.recursive( defaultConfig, ctx.options.pluginsConfig.pandoc );
-
-		// Test labels
-		const re = new RegExp("^[a-zA-Z-._d,s]+$");
-		assert(re.test(this.config.output.main), `pandoc.output.main: does not match pattern "${re.source}"`);
+		this.config = merge.recursive( defaultConfig, ctx.options.pluginsConfig.build);
 	}
 
 	renderTemp(config) {

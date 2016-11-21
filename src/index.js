@@ -10,7 +10,7 @@ const pac = require('../package.json');
 
 let summary = [];
 
-module.exports = argv.pandoc !== true ? {} : {
+module.exports = argv['plugin-build'] !== true ? {} : {
 	hooks: {
 		init: function () {
 			// Init helper
@@ -38,7 +38,7 @@ module.exports = argv.pandoc !== true ? {} : {
 						if (err) return self.log.error(err.message);
 
 						// Log action
-						this.log.info(`Pandoc(${pac.version}) output:`, helper.config.output.path);
+						this.log.info(`plugin-build(${pac.version}) output:`, helper.config.output.path);
 					});
 				});
 			});

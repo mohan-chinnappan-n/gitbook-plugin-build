@@ -10,17 +10,17 @@
 ## Plugin setup
 
 1. Add **GPP** plugin to `(book.json).plugins` array, see gitbook [info about plugins](https://toolchain.gitbook.com/plugins).
-1. Add **GPP** configuration to `(book.json).pluginsConfig.pandoc` object, or leave it empty to use default configuration...
+1. Add **GPP** configuration to `(book.json).pluginsConfig.build` object, or leave it empty to use default configuration...
 
     ```json
     {
-      "bin": "pandoc",
-      "args": [],
-      "opts": {},
-      "template": "_layouts/main.tex",
+      "bin": "pandoc",                  # Pandoc binaries.
+      "args": [],                       # Arguments passed to pandoc on build.
+      "opts": {},                       # Options passed to pandoc on build.
+      "template": "_layouts/main.tex",  # Build template.
       "output": {
-        "path": "build/main.tex",
-        "format": "latex"
+        "path": "build/main.tex",       # Output path for build.
+        "format": "latex"               # Pandoc output format.
       }
     }
     ```
@@ -29,12 +29,12 @@
 
 ## Usage
 
-Add `--pandoc` flag to you gitbook command to start **GPP** build.
+Add `--plugin-build` flag to you gitbook command to start **GPP** build.
 **GPP** will create output file base on [gitbook summary file](https://toolchain.gitbook.com/pages.html)...
 
 ```shell
-gitbook serve --pandoc
-gitbook build --pandoc
+gitbook serve --plugin-build
+gitbook build --plugin-build
 ```
 
 ## Template
@@ -42,7 +42,7 @@ gitbook build --pandoc
 If you don't like how **GPP** creates output file you can setup custom
 template which will follow your rules for compiling output file.
 
-1. Create file on path `(book.json).pluginsConfig.pandoc.template`.
+1. Create file on path `(book.json).pluginsConfig.build.template`.
 1. Use [ejs templating](http://www.embeddedjs.com/) to parse `summary` array. Here is default template...
 
     ```javascript

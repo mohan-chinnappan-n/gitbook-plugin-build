@@ -24,20 +24,20 @@ Fork and clone the project repository:
 
 1. Login to your GitHub account or create one by following the instructions given
    [here](https://github.com/signup/free).
-2. [Fork](http://help.github.com/forking) the [main project 
-   repository](https://github.com/urosjarc/gitbook-plugin-pandoc).
+2. [Fork](http://help.github.com/forking) the 
+   [main project repository](https://github.com/urosjarc/gitbook-plugin-build).
 3. Clone your fork of the project repository and define an `upstream` remote pointing back to
    the project repository that you forked in the first place.
 
 ```shell
 # Clone your GitHub repository:
-git clone git@github.com:<github username>/gitbook-plugin-pandoc.git
+git clone git@github.com:<github username>/gitbook-plugin-build.git
 
 # Go to the project directory:
-cd gitbook-plugin-pandoc
+cd gitbook-plugin-build
 
 # Add the main project repository as an upstream remote to your repository:
-git remote add upstream https://github.com/urosjarc/gitbook-plugin-pandoc.git
+git remote add upstream https://github.com/urosjarc/gitbook-plugin-build.git
 ```
 
 ## Installing NPM Modules

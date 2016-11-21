@@ -50,7 +50,7 @@ quickly:
 ## Submitting a Pull Request
 Before you submit your pull request consider the following guidelines:
 
-* Search [GitHub](https://github.com/urosjarc/gitbook-plugin-pandoc/pulls) for an open or closed Pull Request
+* Search [GitHub](https://github.com/urosjarc/gitbook-plugin-build/pulls) for an open or closed Pull Request
   that relates to your submission. You don't want to duplicate effort.
 * Make your changes in a new git branch:
 
@@ -72,7 +72,7 @@ Before you submit your pull request consider the following guidelines:
     git push origin my-fix-branch
     ```
 
-In GitHub, send a pull request to `gitbook-plugin-pandoc:master`.
+In GitHub, send a pull request to `gitbook-plugin-build:master`.
 
 That's it! Thank you for your contribution!
 
@@ -84,4 +84,4 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 * All public API methods **must be documented** with jsdoc3.
 * Use our set of linting rules.
 
-[github]: https://github.com/urosjarc/gitbook-plugin-pandoc
+[github]: https://github.com/urosjarc/gitbook-plugin-build

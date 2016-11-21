@@ -1,10 +1,10 @@
-site_name: gitbook-plugin-pandoc
+site_name: gitbook-plugin-build
 site_description: Extends gitbook build system with pandoc converter.
 site_author: Uroš Jarc
-site_url: 'https://urosjarc.github.io/gitbook-plugin-pandoc'
+site_url: 'https://urosjarc.github.io/gitbook-plugin-build'
 site_favicon: media/favicon.ico
 site_dir: build/docs
-repo_url: 'https://github.com/urosjarc/gitbook-plugin-pandoc'
+repo_url: 'https://github.com/urosjarc/gitbook-plugin-build'
 copyright: Copyright © 2016 Uroš Jarc
 theme: material
 docs_dir: docs

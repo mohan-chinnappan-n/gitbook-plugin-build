@@ -1,6 +1,6 @@
 {
 	"user": "urosjarc",
-	"project": "generator-generator2",
+	"project": "gitbook-plugin-build",
 	"date-format": "%d.%m.%Y",
 	"output": "docs/changelog.md",
 	"header-label": "",

@@ -15,20 +15,20 @@
 [![Patreon User][support]][support-url]
 [![Twitter User][twitter]][twitter-url]
 
-[npm]: https://img.shields.io/npm/v/gitbook-plugin-pandoc.svg
-[npm-url]: https://www.npmjs.com/package/gitbook-plugin-pandoc
-[travis]: https://img.shields.io/travis/urosjarc/gitbook-plugin-pandoc.svg
-[travis-url]: https://travis-ci.org/urosjarc/gitbook-plugin-pandoc
+[npm]: https://img.shields.io/npm/v/gitbook-plugin-build.svg
+[npm-url]: https://www.npmjs.com/package/gitbook-plugin-build
+[travis]: https://img.shields.io/travis/urosjarc/gitbook-plugin-build.svg
+[travis-url]: https://travis-ci.org/urosjarc/gitbook-plugin-build
 [coverage]: https://img.shields.io/codacy/coverage/71b26bbc68de46ed9b6ad037d821b635.svg
-[coverage-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-pandoc
+[coverage-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build
 [codestyle]: https://img.shields.io/codacy/grade/71b26bbc68de46ed9b6ad037d821b635.svg
-[codestyle-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-pandoc
+[codestyle-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build
 [dep]: https://www.versioneye.com/user/projects/57ed5868769f21004138875f/badge.svg?style=flat-square
 [dep-url]: https://www.versioneye.com/user/projects/57ed5868769f21004138875f
-[docs]: http://inch-ci.org/github/urosjarc/gitbook-plugin-pandoc.svg?style=shields
-[docs-url]: http://inch-ci.org/github/urosjarc/gitbook-plugin-pandoc
+[docs]: http://inch-ci.org/github/urosjarc/gitbook-plugin-build.svg?style=shields
+[docs-url]: http://inch-ci.org/github/urosjarc/gitbook-plugin-build
 [chat]: https://badges.gitter.im/Join%20Chat.svg
-[chat-url]: https://gitter.im/urosjarc/gitbook-plugin-pandoc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[chat-url]: https://gitter.im/urosjarc/gitbook-plugin-build?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [support]: https://img.shields.io/badge/patreon-urosjarc-green.svg?style=social
 [support-url]: https://patreon.com/urosjarc/
 [twitter]: https://img.shields.io/twitter/follow/urosjarc.svg?style=social&label=follow
@@ -38,14 +38,14 @@
 
 !!! Warning
     Project is still in development!
-    Please see project [milestones](https://github.com/urosjarc/gitbook-plugin-pandoc/milestones)
+    Please see project [milestones](https://github.com/urosjarc/gitbook-plugin-build/milestones)
     to see when the first production ready version will come out.
 
 <br>
 
 ## Description
 
-**GPP** (gitbook-plugin-pandoc) extends [gitbook](https://www.gitbook.com/)
+**GPP** (gitbook-plugin-build) extends [gitbook](https://www.gitbook.com/)
 build system with [pandoc](http://pandoc.org/) converter. Pandoc is your
 swiss-army knife when it comes to coverting files. **GPP** use pandoc
 build system to convert and compile your book in variety of formats...

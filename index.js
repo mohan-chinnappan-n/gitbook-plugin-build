@@ -20,10 +20,10 @@ module.exports = argv.pandoc !== true ? {} : {
 
 			// Fill summary array.
 			this.book.summary.walk((article) => {
-                summary.push(
-                	merge.recursive( article,{
-                		srcPath : article.path,
-                		path : helper.getRelOutput(article.path)
+				summary.push(
+					merge.recursive(article, {
+						srcPath: article.path,
+						path: helper.getRelOutput(article.path)
 					})
 				)
 			});
@@ -35,15 +35,15 @@ module.exports = argv.pandoc !== true ? {} : {
 			// Write main file.
 			this.log.debug('padoc(build main file):', mainPath);
 
-            helper.writeOutput(
-            	mainPath,
+			helper.writeOutput(
+				mainPath,
 				helper.renderTemp("main", {summary: summary})
 			);
 		},
-		'page:before': function (page) {
+		page: function (page) {
 			const self = this;
 
-			helper.pandocCompileFile(page.path, (err, content) => {
+			helper.pandocCompile(page.content, 'html', (err, content) => {
 				if (err) return self.log.error(err.message);
 
 				helper.writeOutput(
@@ -51,6 +51,8 @@ module.exports = argv.pandoc !== true ? {} : {
 					helper.renderTemp("content", {content})
 				);
 			});
+
+			return page;
 		}
 	}
 };

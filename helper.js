@@ -10,13 +10,6 @@ const ejs = require('ejs');
 
 class Helper {
 
-	static getFileLang(filePath) {
-		return {
-			'.md': 'markdown',
-			'.adoc': 'asciidoc'
-		}[path.parse(filePath).ext]
-	}
-
 	constructor() {
 		this._srcResolve = null;
 		this.config = null;
@@ -48,15 +41,15 @@ class Helper {
 		assert(re.test(this.config.output.main), `pandoc.output.main: does not match pattern "${re.source}"`);
 	}
 
-	renderTemp(name,config){
+	renderTemp(name, config) {
 		return ejs.render(
-			fs.readFileSync(this.getSrc(this.config.templates[name]),'utf-8'),
+			fs.readFileSync(this.getSrc(this.config.templates[name]), 'utf-8'),
 			config
 		)
 	}
 
 	getRelOutput(...paths) {
-		return this.getOutput(...paths).replace( `${this.getOutput()}/`, '' );
+		return this.getOutput(...paths).replace(`${this.getOutput()}/`, '');
 	}
 
 	getOutput(...paths) {
@@ -94,26 +87,6 @@ class Helper {
 	rmOutputDir() {
 		this.log.debug('pandoc(delete dir):', this.getOutput());
 		fse.removeSync(this.getOutput());
-	}
-
-	/**
-	 * Compile file.
-	 * @param filePath relative path from src
-	 * @param cb
-	 */
-	pandocCompileFile(filePath, cb) {
-
-		const fromPath = this.getSrc(filePath);
-
-		fs.readFile(fromPath, 'utf-8', (err, data) => {
-			if (err) return cb(err);
-
-			this.pandocCompile(data, Helper.getFileLang(fromPath), (err, result) => {
-				if (err) return cb(err);
-
-				cb(null, result);
-			});
-		});
 	}
 
 	pandocCompile(string, srcLang, cb) {

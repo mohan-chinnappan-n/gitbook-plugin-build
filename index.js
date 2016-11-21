@@ -3,6 +3,7 @@
 const path = require('path');
 const argv = require('yargs').argv;
 const mkdirp = require('mkdirp');
+const fs = require('fs');
 
 const helper = require('./helper');
 

@@ -46,10 +46,7 @@ class Helper {
 	}
 
 	getOutput() {
-		const fileObj = path.parse(
-			this.getSrc(this.config.output.path)
-		);
-		return `${fileObj.dir}/${fileObj.name}${fileObj.ext ? this.config.output.ext : ''}`;
+		return this.getSrc(this.config.output.path)
 	}
 
 	pandocCompile(string, cb) {

@@ -89,9 +89,9 @@ class Helper {
 		fse.removeSync(this.getOutput());
 	}
 
-	pandocCompile(string, srcLang, cb) {
+	pandocCompile(string, cb) {
 		pdc(string,
-			srcLang,
+			'html',
 			this.config.output.format,
 			this.config.args,
 			this.config.opts,

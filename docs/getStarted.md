@@ -32,7 +32,7 @@
 Add `--pandoc` flag to you gitbook command to start **GPP** build.
 **GPP** will create output file base on [gitbook summary file](https://toolchain.gitbook.com/pages.html)...
 
-```
+```shell
 gitbook serve --pandoc
 gitbook build --pandoc
 ```
@@ -62,16 +62,3 @@ template which will follow your rules for compiling output file.
       "type": <String>      // Src file type (markdown or asciidoc).
     }
     ```
-
-## Report bugs & missing features
-
-If you think this project is missing some important feature please
-let contributors know about your thoughts! And of course we would
-like to know about your bugs too! We like them but we will **smash** them!
-
-1. Create new issue on [issues page](https://github.com/urosjarc/gitbook-plugin-pandoc/issues).
-1. Fill issue form and report your bug.
-
-
-
-

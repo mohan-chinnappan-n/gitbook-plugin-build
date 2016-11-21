@@ -6,6 +6,7 @@ const mkdirp = require('mkdirp');
 const fs = require('fs');
 
 const helper = require('./helper');
+const pac = require('../package.json');
 
 let summary = [];
 
@@ -37,7 +38,7 @@ module.exports = argv.pandoc !== true ? {} : {
 						if (err) return self.log.error(err.message);
 
 						// Log action
-						this.log.info('Pandoc output:', helper.config.output.path);
+						this.log.info(`Pandoc(${pac.version}) output:`, helper.config.output.path);
 					});
 				});
 			});

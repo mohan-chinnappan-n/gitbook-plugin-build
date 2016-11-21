@@ -6,6 +6,7 @@ const path = require('path');
 const pdc = require('pdc');
 const assert = require('assert');
 const ejs = require('ejs');
+const defaultConfig = require('./config.json');
 
 class Helper {
 
@@ -19,16 +20,7 @@ class Helper {
 		// Set labels
 		this.getSrc = ctx.book.resolve;
 		this.log = ctx.log;
-		this.config = merge.recursive({
-			"bin": "pandoc",
-			"args": [],
-			"opts": {},
-            "template": "_layouts/main.tex",
-			"output": {
-				"path": "../build/book/latex/main.tex",
-				"format": "latex"
-			}
-		}, ctx.options.pluginsConfig.pandoc);
+		this.config = merge.recursive( defaultConfig, ctx.options.pluginsConfig.pandoc );
 
 		// Test labels
 		const re = new RegExp("^[a-zA-Z-._d,s]+$");
@@ -36,10 +28,18 @@ class Helper {
 	}
 
 	renderTemp(config) {
-		return ejs.render(
-			fs.readFileSync(this.getSrc(this.config.template), 'utf-8'),
-			config
-		)
+        if (fs.existsSync(this.config.template)) {
+            return ejs.render(
+                fs.readFileSync(this.getSrc(this.config.template), 'utf-8'),
+                config
+            )
+        } else {
+            let content = '';
+            config.summary.forEach((article) => {
+                content += `${article.content}\n`;
+            });
+            return content;
+        }
 	}
 
 	getOutput() {

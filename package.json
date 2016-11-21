@@ -2,6 +2,7 @@
   "name": "gitbook-plugin-pandoc",
   "version": "0.0.1",
   "description": "Extends gitbook build system with pandoc converter.",
+  "main": "src/index.js",
   "engines": {
     "gitbook": ">1.x.x"
   },

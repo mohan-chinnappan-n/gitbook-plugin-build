@@ -1,0 +1,10 @@
+{
+  "bin": "pandoc",
+  "args": [],
+  "opts": {},
+  "template": "_layouts/main.tex",
+  "output": {
+    "path": "build/main.tex",
+    "format": "latex"
+  }
+}

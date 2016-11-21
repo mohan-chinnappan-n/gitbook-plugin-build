@@ -1,10 +1,8 @@
 'use strict';
 
 const path = require('path');
-const fs = require('fs');
 const argv = require('yargs').argv;
-const merge = require('merge');
-const fse = require('fs-extra');
+const mkdirp = require('mkdirp');
 
 const helper = require('./helper');
 
@@ -16,39 +14,41 @@ module.exports = argv.pandoc !== true ? {} : {
 			// Init helper
 			helper.init(this);
 
-			// Fill summary array.
+			// Fill summary array
 			this.book.summary.walk((article) => {
 				summary.push( article );
 			});
 		},
 		finish: function () {
 			const self = this;
-			const outputPath = helper.getOutput(
-				helper.getMainFile()
-			);
+			const outputPath = helper.getOutput();
 
-			// Write main file.
+			// Log action
 			this.log.debug('padoc(build main file):', outputPath);
 
-			fse.mkdirp(path.parse(outputPath).dir, (err) => {
+			// Create output dir
+			mkdirp(path.parse(outputPath).dir, (err) => {
 				if (err) return self.log.error(err.message);
 
-				helper.config.args.push('--standalone');
-				helper.pandocCompile(helper.renderTemp('main',{summary: summary}), (err, compiledContent) => {
+				// Compile rendered main file
+				helper.pandocCompile(helper.renderTemp('main',{summary: summary}), (err, content) => {
 					if (err) return self.log.error(err.message);
 
-					fse.outputFile(outputPath, compiledContent, (err) => {
+					// Write file to outputpath
+					fs.writeFile(outputPath, content, (err) => {
 						if (err) return self.log.error(err.message);
 					});
 				});
 			});
 		},
 		page: function (page) {
+			// Fill summary with compiled page content
 			summary.forEach((article, i, array) => {
 				if(article.path == page.path){
                     array[i].content = page.content;
 				}
 			});
+
 			return page;
 		}
 	}

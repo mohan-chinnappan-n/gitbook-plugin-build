@@ -1,7 +1,6 @@
 'use strict';
 
 const merge = require('merge');
-const fse = require('fs-extra');
 const fs = require('fs');
 const path = require('path');
 const pdc = require('pdc');
@@ -11,14 +10,14 @@ const ejs = require('ejs');
 class Helper {
 
 	constructor() {
-		this._srcResolve = null;
+		this.getSrc = null;
 		this.config = null;
 		this.log = null;
 	}
 
 	init(ctx) {
 		// Set labels
-		this._srcResolve = ctx.book.resolve;
+		this.getSrc = ctx.book.resolve;
 		this.log = ctx.log;
 		this.config = merge.recursive({
 			"bin": "pandoc",
@@ -29,10 +28,8 @@ class Helper {
 				"content": "_layouts/content.tex"
 			},
 			"output": {
-				"path": "../build/book/latex",
-				"format": "latex",
-				"ext": ".tex",
-				"main": "main"
+				"path": "../build/book/latex/main.tex",
+				"format": "latex"
 			}
 		}, ctx.options.pluginsConfig.pandoc);
 
@@ -48,52 +45,22 @@ class Helper {
 		)
 	}
 
-	getRelOutput(...paths) {
-		return this.getOutput(...paths).replace(`${this.getOutput()}/`, '');
-	}
-
-	getOutput(...paths) {
+	getOutput() {
 		const fileObj = path.parse(
-			this.getSrc(this.config.output.path, ...paths)
+			this.getSrc(this.config.output.path)
 		);
 		return `${fileObj.dir}/${fileObj.name}${fileObj.ext ? this.config.output.ext : ''}`;
 	}
 
-	getSrc(...paths) {
-		return this._srcResolve(
-			path.join(...paths)
-		);
-	}
-
-	getMainFile() {
-		return `./${this.config.output.main}${this.config.output.ext}`;
-	}
-
-	writeOutput(filePath, content) {
-		const self = this;
-		const outputPath = this.getOutput(filePath);
-
-		this.log.debug('padoc(build file):', outputPath);
-
-		fse.mkdirp(path.parse(outputPath).dir, (err) => {
-			if (err) return self.log.error(err.message);
-
-			fse.outputFile(outputPath, content, (err) => {
-				if (err) return self.log.error(err.message);
-			});
-		});
-	}
-
-	rmOutputDir() {
-		this.log.debug('pandoc(delete dir):', this.getOutput());
-		fse.removeSync(this.getOutput());
-	}
-
 	pandocCompile(string, cb) {
+		const args = this.config.args
+			.concat(['--standalone'])
+			.filter((v, i, a) => a.indexOf(v) === i);
+
 		pdc(string,
 			'html',
 			this.config.output.format,
-			this.config.args,
+			args,
 			this.config.opts,
 			(err, result) => {
 				if (err) return cb(err);
@@ -101,7 +68,6 @@ class Helper {
 				cb(null, result);
 			});
 	}
-
 }
 
 module.exports = new Helper();

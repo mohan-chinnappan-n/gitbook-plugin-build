@@ -2,7 +2,7 @@
 	"name": "gitbook-plugin-build",
 	"version": "0.0.1",
 	"description": "Extends gitbook build system with pandoc converter.",
-	"main": "src/index.js",
+	"main": "./src/index.js",
 	"license": "MIT",
 	"homepage": "https://urosjarc.github.io/gitbook-plugin-build",
 	"author": {
@@ -27,7 +27,8 @@
 		"src"
 	],
 	"engines": {
-		"node": ">=4.0.0"
+		"node": ">=4.0.0",
+		"gitbook": ">1.x.x"
 	},
 	"scripts": {
 		"gulp": "gulp",

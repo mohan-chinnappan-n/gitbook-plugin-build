@@ -4,7 +4,7 @@
   "opts": {},
   "template": "_layouts/main.tex",
   "output": {
-    "path": "build/main.tex",
+    "path": "main.tex",
     "format": "latex"
   }
 }

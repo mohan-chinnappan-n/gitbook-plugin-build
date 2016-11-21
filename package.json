@@ -1,7 +1,7 @@
 {
   "name": "gitbook-plugin-pandoc",
   "version": "0.0.1",
-  "description": "Compile gitbook with pandoc to any pandoc compatible format.",
+  "description": "Extends gitbook build system with pandoc converter.",
   "engines": {
     "gitbook": ">1.x.x"
   },
@@ -9,8 +9,9 @@
     "properties": {}
   },
   "dependencies": {
-    "fs-extra": "^1.0.0",
+    "ejs": "^2.5.2",
     "merge": "^1.2.0",
+    "mkdirp": "^0.5.1",
     "pdc": "^0.2.3",
     "yargs": "^6.4.0"
   }

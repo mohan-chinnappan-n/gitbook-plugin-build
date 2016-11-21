@@ -1,0 +1,42 @@
+site_name: gitbook-plugin-pandoc
+site_description: Extends gitbook build system with pandoc converter.
+site_author: Uroš Jarc
+site_url: 'https://urosjarc.github.io/gitbook-plugin-pandoc'
+site_favicon: media/favicon.ico
+site_dir: build/docs
+repo_url: 'https://github.com/urosjarc/gitbook-plugin-pandoc'
+copyright: Copyright © 2016 Uroš Jarc
+theme: material
+docs_dir: docs
+pages:
+  - Project: index.md
+  - Get started: getStarted.md
+  - Contribution: contribution.md
+  - Developers: developers.md
+  - Documentation: documentation.md
+  - Changelog: changelog.md
+extra:
+  version: 0.0.1
+  logo: media/logo.png
+  github:
+    download_release: true
+  palette:
+    primary: green
+    accent: green
+  font:
+    text: Roboto
+    code: Roboto Mono
+  author:
+    github: urosjarc
+    twitter: urosjarc
+markdown_extensions:
+  - codehilite(css_class=code)
+  - admonition
+  - toc:
+      permalink: '#'
+google_analytics:
+  - UA-53923399-3
+  - auto
+extra_css:
+  - /template/theme.css
+  - /template/fadein.css

@@ -1,4 +1,9 @@
-/* eslint-disable no-restricted-syntax, guard-for-in, no-loop-func*/
+/*
+ eslint-disable no-var, import/no-extraneous-dependencies,
+ object-shorthand, func-names, vars-on-top,
+ prefer-arrow-callback, prefer-template,
+ no-restricted-syntax, guard-for-in, no-loop-func
+ */
 
 'use strict';
 
@@ -83,7 +88,7 @@ exports.handlers = {
 		});
 
 		if (errorMsg.length > 0) {
-			logger.error(errorMsg.join('\n'));
+			logger.warn(errorMsg.join('\n')); // Todo: rename this to error.
 		}
 	}
 };

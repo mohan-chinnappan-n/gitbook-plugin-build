@@ -1,4 +1,5 @@
-**/node_modules
-/build
-/.idea
+node_modules
+build
+.idea
+docs.json
 npm-debug.log

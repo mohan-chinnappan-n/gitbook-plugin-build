@@ -2,8 +2,7 @@
 	"opts": {
 		"destination": "./build/docs/documentation",
 		"encoding": "utf8",
-		"recurse": true,
-		"tutorials": "./docs/tutorials"
+		"recurse": true
 	},
 	"tags": {
 		"allowUnknownTags": false

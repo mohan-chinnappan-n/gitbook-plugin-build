@@ -14,6 +14,21 @@
 		"airbnb-base"
 	],
 	"rules": {
+		"import/no-extraneous-dependencies": [
+			"error",
+			{
+				"devDependencies": [
+					"config/jsdocPlugins/**",
+					"**/test/**",
+					"**/gulpfile.js"
+				],
+				"optionalDependencies": false
+			}
+		],
+		"max-len": [
+			"error",
+			120
+		],
 		"indent": [
 			"error",
 			"tab"

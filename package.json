@@ -1,8 +1,8 @@
 {
-  "name": "gitbook-plugin-build",
-  "version": "0.0.1",
-  "description": "Extends gitbook build system with pandoc converter.",
-  "main": "src/index.js",
+	"name": "gitbook-plugin-build",
+	"version": "0.0.1",
+	"description": "Extends gitbook build system with pandoc converter.",
+	"main": "src/index.js",
 	"license": "MIT",
 	"homepage": "https://urosjarc.github.io/gitbook-plugin-build",
 	"author": {
@@ -15,7 +15,13 @@
 		"url": "https://github.com/urosjarc/gitbook-plugin-build"
 	},
 	"keywords": [
-		"gitbook", "plugin", "pandoc", "latex", "markdown", "book", "build"
+		"gitbook",
+		"plugin",
+		"pandoc",
+		"latex",
+		"markdown",
+		"book",
+		"build"
 	],
 	"files": [
 		"src"
@@ -28,13 +34,13 @@
 		"test": "npm run gulp test:spec && npm run gulp coverage && npm run gulp test:e2e && npm run gulp lint && npm run gulp test:docs && npm run gulp jsdoc && npm run gulp test:dep",
 		"prepublish": "npm run gulp prepublish"
 	},
-  "dependencies": {
-    "ejs": "^2.5.2",
-    "merge": "^1.2.0",
-    "mkdirp": "^0.5.1",
-    "pdc": "^0.2.3",
-    "yargs": "^6.4.0"
-  },
+	"dependencies": {
+		"ejs": "^2.5.2",
+		"merge": "^1.2.0",
+		"mkdirp": "^0.5.1",
+		"pdc": "^0.2.3",
+		"yargs": "^6.4.0"
+	},
 	"devDependencies": {
 		"gulp": "^3.9.0",
 		"gulp-check-deps": "^1.4.1",
@@ -49,6 +55,7 @@
 		"gulp-nsp": "^2.1.0",
 		"gulp-plumber": "^1.0.0",
 		"gulp-shell": "^0.5.2",
+		"js-yaml": "^3.6.1",
 		"inchjs": "^0.4.1",
 		"jsdoc": "^3.4.2",
 		"sinon": "^1.17.5",

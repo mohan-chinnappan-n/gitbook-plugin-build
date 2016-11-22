@@ -59,22 +59,42 @@ class Helper {
 
 	/**
 	 * Get rendered template content.
-	 * @param config {Object} Summary array of articles.
 	 * @returns {String} Rendered content.
+	 * @param config {Object} Should be in form `{summary: [{content: <String}]}`.
 	 */
 	renderTemp(config) {
-		if (fs.existsSync(this.config.template)) {
-			return ejs.render(
-				fs.readFileSync(this.getSrc(this.config.template), 'utf-8'),
-				config
-			);
-		} else {
-			let content = '';
+		let error = false;
+		let content;
+
+		try {
+			const stat = fs.statSync(this.config.template);
+
+			if (stat.isFile() && !stat.isDirectory()) {
+				// If template exist render with ejs.
+				content = ejs.render(
+					fs.readFileSync(this.getSrc(this.config.template), 'utf-8'),
+					config
+				);
+			} else {
+				error = true;
+			}
+		}
+		catch (err) {
+			// On template fail log error.
+			this.log.warn('plugin-build:', err.message);
+
+			// If template not exist create without templating.
+			content = '';
 			config.summary.forEach((article) => {
 				content += `${article.content}\n`;
 			});
-			return content;
 		}
+
+		// Throw error if template path is folder.
+		if (error) throw new Error(`Template path is not file: ${this.config.template}`);
+
+		// Returns content.
+		return content;
 	}
 
 	/**

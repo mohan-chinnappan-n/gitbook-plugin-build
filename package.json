@@ -1,102 +1,102 @@
 {
-	"name": "gitbook-plugin-build",
-	"version": "0.0.5",
-	"description": "Extends gitbook build system with pandoc converter.",
-	"main": "./src/index.js",
-	"license": "MIT",
-	"homepage": "https://urosjarc.github.io/gitbook-plugin-build",
-	"author": {
-		"name": "Uroš Jarc",
-		"email": "jar.fmf@gmail.com",
-		"url": "https://github.com/urosjarc"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/urosjarc/gitbook-plugin-build"
-	},
-	"keywords": [
-		"gitbook",
-		"plugin",
-		"pandoc",
-		"latex",
-		"markdown",
-		"book",
-		"build"
-	],
-	"files": [
-		"src"
-	],
-	"gitbook": {
-		"properties": {
-			"bin": {
-				"type": "string",
-				"default": "pandoc",
-				"description": "Path to pandoc binaries."
-			},
-			"args": {
-				"type": "array",
-				"default": [],
-				"description": "Arguments passed to pandoc when compiling gitbook."
-			},
-			"opts": {
-				"type": "object",
-				"default": {},
-				"description": "Options passed to pandoc when compiling gitbook."
-			},
-			"template": {
-				"type": "string",
-				"default": "_layouts/main.tex",
-				"description": "Optional template file."
-			},
-			"output": {
-				"type": "string",
-				"default": "_book/main.tex",
-				"description": "Output informations."
-			},
-			"format": {
-				"type": "string",
-				"default": "latex",
-				"description": "Output informations."
-			}
-		}
-	},
-	"engines": {
-		"node": ">=4.0.0",
-		"gitbook": ">1.x.x"
-	},
-	"scripts": {
-		"gulp": "gulp",
-		"test": "npm run gulp test:spec && npm run gulp coverage && npm run gulp test:e2e && npm run gulp lint && npm run gulp test:docs && npm run gulp jsdoc && npm run gulp test:dep",
-		"prepublish": "npm run gulp prepublish"
-	},
-	"dependencies": {
-		"ejs": "^2.5.2",
-		"mkdirp": "^0.5.1",
-		"pdc": "^0.2.3",
-		"yargs": "^6.4.0"
-	},
-	"devDependencies": {
-		"gulp": "^3.9.0",
-		"gulp-check-deps": "^1.4.1",
-		"gulp-codacy": "^1.0.0",
-		"gulp-eslint": "^3.0.1",
-		"gulp-exclude-gitignore": "^1.0.0",
-		"gulp-gh-pages": "^0.5.4",
-		"gulp-help": "^1.6.1",
-		"gulp-istanbul": "^1.0.0",
-		"gulp-jsdoc3": "^1.0.1",
-		"gulp-mocha": "^3.0.1",
-		"gulp-nsp": "^2.1.0",
-		"gulp-plumber": "^1.0.0",
-		"gulp-shell": "^0.5.2",
-		"js-yaml": "^3.6.1",
-		"inchjs": "^0.4.1",
-		"jsdoc": "^3.4.2",
-		"sinon": "^1.17.5",
-		"assert": "^1.4.1",
-		"browser-sync": "^2.16.0",
-		"eslint": "^3.1.1",
-		"eslint-config-airbnb-base": "^10.0.1",
-		"eslint-plugin-import": "^2.1.0"
-	}
+  "name": "gitbook-plugin-build",
+  "version": "0.0.5",
+  "description": "Extends gitbook build system with pandoc converter.",
+  "main": "./src/index.js",
+  "license": "MIT",
+  "homepage": "https://urosjarc.github.io/gitbook-plugin-build",
+  "author": {
+    "name": "Uroš Jarc",
+    "email": "jar.fmf@gmail.com",
+    "url": "https://github.com/urosjarc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/urosjarc/gitbook-plugin-build"
+  },
+  "keywords": [
+    "gitbook",
+    "plugin",
+    "pandoc",
+    "latex",
+    "markdown",
+    "book",
+    "build"
+  ],
+  "files": [
+    "src"
+  ],
+  "gitbook": {
+    "properties": {
+      "bin": {
+        "type": "string",
+        "default": "pandoc",
+        "description": "Path to pandoc binaries."
+      },
+      "args": {
+        "type": "array",
+        "default": [],
+        "description": "Arguments passed to pandoc when compiling gitbook."
+      },
+      "opts": {
+        "type": "object",
+        "default": {},
+        "description": "Options passed to pandoc when compiling gitbook."
+      },
+      "template": {
+        "type": "string",
+        "default": "_layouts/main.tex",
+        "description": "Optional template file."
+      },
+      "output": {
+        "type": "string",
+        "default": "_book/main.tex",
+        "description": "Output informations."
+      },
+      "format": {
+        "type": "string",
+        "default": "latex",
+        "description": "Output informations."
+      }
+    }
+  },
+  "engines": {
+    "node": ">=4.0.0",
+    "gitbook": ">1.x.x"
+  },
+  "scripts": {
+    "gulp": "gulp",
+    "test": "npm run gulp test:spec && npm run gulp coverage && npm run gulp test:e2e && npm run gulp lint && npm run gulp test:docs && npm run gulp jsdoc && npm run gulp test:dep",
+    "prepublish": "npm run gulp prepublish"
+  },
+  "dependencies": {
+    "ejs": "^2.5.2",
+    "mkdirp": "^0.5.1",
+    "pdc": "^0.2.3",
+    "yargs": "^6.4.0"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "browser-sync": "^2.16.0",
+    "eslint": "^3.1.1",
+    "eslint-config-airbnb-base": "^10.0.1",
+    "eslint-plugin-import": "^2.1.0",
+    "gulp": "^3.9.0",
+    "gulp-check-deps": "^1.4.1",
+    "gulp-codacy": "^1.0.0",
+    "gulp-eslint": "^3.0.1",
+    "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-help": "^1.6.1",
+    "gulp-istanbul": "^1.0.0",
+    "gulp-jsdoc3": "^1.0.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-nsp": "^2.1.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-shell": "^0.5.2",
+    "inchjs": "^0.4.1",
+    "js-yaml": "^3.6.1",
+    "jsdoc": "^3.4.2",
+    "sinon": "^1.17.5"
+  }
 }

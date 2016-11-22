@@ -3,6 +3,8 @@
 const fs = require('fs');
 const pdc = require('pdc');
 const ejs = require('ejs');
+const merge = require('merge');
+const pac = require('../package.json');
 
 /**
  * Module that hold all hard logic.
@@ -43,7 +45,10 @@ class Helper {
 		// Set labels
 		this.getSrc = ctx.book.resolve;
 		this.log = ctx.log;
-		this.config = ctx.options.pluginsConfig.build;
+		this.config = merge.recursive(
+			pac.gitbook,
+			ctx.options.pluginsConfig.build
+		);
 	}
 
 	/**

@@ -55,7 +55,7 @@ module.exports = argv['plugin-build'] !== true ? {} : {
 							if (fsErr) return self.log.error(fsErr.message);
 
 							// Log action
-							this.log.info(`plugin-build(${pac.version}) output:`, helper.config.output.path);
+							this.log.info(`plugin-build(${pac.version}) output:`, helper.config.output);
 
 							resolve();
 						});

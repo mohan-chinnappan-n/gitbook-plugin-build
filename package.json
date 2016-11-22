@@ -49,11 +49,13 @@
 				"description": "Optional template file."
 			},
 			"output": {
-				"type": "object",
-				"default": {
-					"path": "_book/main.tex",
-					"format": "latex"
-				},
+				"type": "string",
+				"default": "_book/main.tex",
+				"description": "Output informations."
+			},
+			"format": {
+				"type": "string",
+				"default": "latex",
 				"description": "Output informations."
 			}
 		}

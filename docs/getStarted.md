@@ -10,21 +10,8 @@
 ## Plugin setup
 
 * Add **GPP** plugin to `(book.json).plugins` array, see gitbook [info about plugins](https://toolchain.gitbook.com/plugins).
-* Add **GPP** configuration to `(book.json).pluginsConfig.build` object, or leave it empty to use default configuration...
-
-```json
-{
-  "bin": "pandoc",                  # Pandoc binaries.
-  "args": [],                       # Arguments passed to pandoc on build.
-  "opts": {},                       # Options passed to pandoc on build.
-  "template": "_layouts/main.tex",  # Build template.
-  "output": {
-    "path": "build/main.tex",       # Output path for build.
-    "format": "latex"               # Pandoc output format.
-  }
-}
-```
-
+* Add **GPP** configuration to `(book.json).pluginsConfig.build` object, or leave it empty to use default configuration.
+* Default configuration is located [here at the bottom](https://plugins.gitbook.com/plugin/build).
 * Install gitbook plugins by running `gitbook install`.
 * To se which formats pandoc provides check `man pandoc`.
 

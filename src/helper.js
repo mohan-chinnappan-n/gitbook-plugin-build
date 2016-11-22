@@ -82,7 +82,7 @@ class Helper {
 	 * @returns {String}
 	 */
 	getOutput() {
-		return this.getSrc(this.config.output.path);
+		return this.getSrc(this.config.output);
 	}
 
 	/**
@@ -97,7 +97,7 @@ class Helper {
 
 		pdc(html,
 			'html',
-			this.config.output.format,
+			this.config.format,
 			args,
 			this.config.opts,
 			(err, result) => {

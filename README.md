@@ -1,4 +1,4 @@
-![Project logo](docs/media/header.png?raw=true)
+![Project logo](https://github.com/urosjarc/gitbook-plugin-build/blob/develop/docs/media/header.png?raw=true)
 
 <br>
 

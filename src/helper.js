@@ -5,9 +5,7 @@
  */
 const pdc = require('pdc');
 const ejs = require('ejs');
-const merge = require('merge');
 const fs = require('fs');
-const pac = require('../package.json');
 
 /**
  * Module that hold all hard logic.
@@ -31,19 +29,19 @@ class Helper {
 		/**
 		 * Get absolute src path.
 		 * @param path
-		 * @member Helper#getSrc
+		 * @member module:helper~Helper#getSrc
 		 */
 		this.getSrc = null;
 
 		/**
 		 * Main plugin configuration.
-		 * @member Helper#config
+		 * @member module:helper~Helper#config
 		 */
 		this.config = null;
 
 		/**
 		 * Gitbook logger.
-		 * @member Helper#log
+		 * @member module:helper~Helper#log
 		 */
 		this.log = null;
 	}
@@ -53,13 +51,10 @@ class Helper {
 	 * @param ctx {Object} `this` plugin object.
 	 */
 	init(ctx) {
-		// Set labels
+		// Sets instance members.
 		this.getSrc = ctx.book.resolve;
 		this.log = ctx.log;
-		this.config = merge.recursive(
-			pac.gitbook,
-			ctx.options.pluginsConfig.build
-		);
+		this.config = ctx.options.pluginsConfig.build;
 	}
 
 	/**

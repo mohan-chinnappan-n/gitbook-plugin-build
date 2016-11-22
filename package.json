@@ -27,13 +27,35 @@
 		"src"
 	],
 	"gitbook": {
-		"bin": "pandoc",
-		"args": [],
-		"opts": {},
-		"template": "_layouts/main.tex",
-		"output": {
-			"path": "main.tex",
-			"format": "latex"
+		"properties": {
+			"bin": {
+				"type": "string",
+				"default": "pandoc",
+				"description": "Path to pandoc binaries."
+			},
+			"args": {
+				"type": "array",
+				"default": [],
+				"description": "Arguments passed to pandoc when compiling gitbook."
+			},
+			"opts": {
+				"type": "object",
+				"default": {},
+				"description": "Options passed to pandoc when compiling gitbook."
+			},
+			"template": {
+				"type": "string",
+				"default": "_layouts/main.tex",
+				"description": "Optional template file."
+			},
+			"output": {
+				"type": "object",
+				"default": {
+					"path": "_book/main.tex",
+					"format": "latex"
+				},
+				"description": "Output informations."
+			}
 		}
 	},
 	"engines": {
@@ -47,7 +69,6 @@
 	},
 	"dependencies": {
 		"ejs": "^2.5.2",
-		"merge": "^1.2.0",
 		"mkdirp": "^0.5.1",
 		"pdc": "^0.2.3",
 		"yargs": "^6.4.0"

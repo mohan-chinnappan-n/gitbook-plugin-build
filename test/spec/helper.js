@@ -10,9 +10,9 @@ describe('module:helper', () => {
 	describe('Helper', () => {
 		/**
 		 * @test module:helper~Helper#init
-		 * @test Helper#getSrc
-		 * @test Helper#config
-		 * @test Helper#log
+		 * @test module:helper~Helper#getSrc
+		 * @test module:helper~Helper#config
+		 * @test module:helper~Helper#log
 		 */
 		describe('#init', () => {
 

@@ -25,20 +25,24 @@ module.exports = argv['plugin-build'] !== true ? {} : {
 			const self = this;
 			const outputPath = helper.getOutput();
 
-			// Create output dir
-			mkdirp(path.parse(outputPath).dir, (mkdirpErr) => {
-				if (mkdirpErr) return self.log.error(mkdirpErr.message);
+			return new Promise((resolve) => {
+				// Create output dir
+				mkdirp(path.parse(outputPath).dir, (mkdirpErr) => {
+					if (mkdirpErr) return self.log.error(mkdirpErr.message);
 
-				// Compile rendered main file
-				helper.pandocCompile(helper.renderTemp({summary}), (pandocErr, content) => {
-					if (pandocErr) return self.log.error(pandocErr.message);
+					// Compile rendered main file
+					helper.pandocCompile(helper.renderTemp({summary}), (pandocErr, content) => {
+						if (pandocErr) return self.log.error(pandocErr.message);
 
-					// Write file to outputpath
-					fs.writeFile(outputPath, content, (fsErr) => {
-						if (fsErr) return self.log.error(fsErr.message);
+						// Write file to outputpath
+						fs.writeFile(outputPath, content, (fsErr) => {
+							if (fsErr) return self.log.error(fsErr.message);
 
-						// Log action
-						this.log.info(`plugin-build(${pac.version}) output:`, helper.config.output.path);
+							// Log action
+							this.log.info(`plugin-build(${pac.version}) output:`, helper.config.output.path);
+
+							resolve();
+						});
 					});
 				});
 			});

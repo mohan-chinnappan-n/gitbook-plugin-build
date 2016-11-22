@@ -16,7 +16,7 @@ pages:
   - Documentation: documentation.md
   - Changelog: changelog.md
 extra:
-  version: 0.0.2
+  version: 0.0.4
   logo: media/logo.png
   github:
     download_release: true

@@ -19,7 +19,7 @@
 [npm-url]: https://www.npmjs.com/package/gitbook-plugin-build
 [travis]: https://img.shields.io/travis/urosjarc/gitbook-plugin-build.svg
 [travis-url]: https://travis-ci.org/urosjarc/gitbook-plugin-build
-[coverage]: https://img.shields.io/codacy/coverage/574f24efb20948afac9ba998f3d159c3.svg
+[coverage]: https://img.shields.io/codacy/coverage/27e38bb72bdc4476b2e87e9926df0485.svg
 [coverage-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build
 [codestyle]: https://img.shields.io/codacy/grade/27e38bb72bdc4476b2e87e9926df0485.svg
 [codestyle-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build

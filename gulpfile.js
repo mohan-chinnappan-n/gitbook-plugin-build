@@ -37,13 +37,16 @@ gulp.task('test:spec', 'Run integration/unit tests.', ['test:pre'], (cb) => {
 		'test/spec/**/*.js'
 	]).pipe(plumber())
 		.pipe(mocha({
-			reporter: 'spec',
-			timeout: 20000
+			reporter: 'spec'
 		}))
-		.on('error', (err) => {
+		.on('error', function (err) {
 			mochaErr = err;
 		})
-		.on('end', () => {
+		.pipe(istanbul.writeReports({
+			dir: './build/coverage',
+			reportOpts: {dir: './build/coverage'}
+		}))
+		.on('end', function () {
 			cb(mochaErr);
 		});
 });

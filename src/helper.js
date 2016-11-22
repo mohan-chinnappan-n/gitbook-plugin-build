@@ -123,9 +123,8 @@ class Helper {
 	/**
 	 * Compile html string to output format.
 	 * @param html {String} Html string format.
-	 * @param cb {strCallback} Callback for compiled content.
 	 */
-	pandocCompile(html, cb) {
+	pandocCompile(html) {
 		// Add standalone flag to pandoc arguments.
 		const args = this.config.args
 			.concat(['--standalone'])
@@ -138,18 +137,20 @@ class Helper {
 			config: this.config
 		});
 
-		// Compile html string.
-		pdc(html,
-			'html',
-			this.config.format,
-			args,
-			this.config.opts,
-			(err, result) => {
-				if (err) return cb(err);
+		return new Promise((resolve,reject) => {
+			// Compile html string.
+			pdc(html,
+				'html',
+				this.config.format,
+				args,
+				this.config.opts,
+				(err, result) => {
+					if (err) reject(err);
 
-				// Call callback with (err, result).
-				cb(null, result);
-			});
+					// Call callback with (err, result).
+					resolve(result);
+				});
+		});
 	}
 }
 

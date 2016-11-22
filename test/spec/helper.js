@@ -149,33 +149,32 @@ describe('module:helper', () => {
 				};
 			});
 
-			it('returns compiled html from callback and logs', (done) => {
-				helper.pandocCompile('<p>hello world</p>', (err, result) => {
-					if (err) done(err);
-					assert.equal(result, 'hello world\n');
-					assert.deepEqual(helper.log.debug.getCalls()[0].args, [
-						'plugin-build(compile):', {
-							args: ['--standalone'].sort(),
-							config: helper.config
-						}
-					]);
-					done();
-				});
+			it('returns compiled html from callback and logs', () => {
+				return helper.pandocCompile('<p>hello world</p>')
+					.then((result) => {
+						assert.equal(result, 'hello world\n');
+						assert.deepEqual(helper.log.debug.getCalls()[0].args, [
+							'plugin-build(compile):', {
+								args: ['--standalone'].sort(),
+								config: helper.config
+							}
+						]);
+					});
+
 			});
 
-			it('filter config args and sort it', (done) => {
+			it('filter config args and sort it', () => {
 				helper.config.args = ['--standalone', '--standalone', '--verbose'];
 
-				helper.pandocCompile('<p>hello world</p>', (err) => {
-					if (err) done(err);
-					assert.deepEqual(helper.log.debug.getCalls()[0].args, [
-						'plugin-build(compile):', {
-							args: ['--verbose', '--standalone'].sort(),
-							config: helper.config
-						}
-					]);
-					done();
-				});
+				return helper.pandocCompile('<p>hello world</p>')
+					.then(() => {
+						assert.deepEqual(helper.log.debug.getCalls()[0].args, [
+							'plugin-build(compile):', {
+								args: ['--verbose', '--standalone'].sort(),
+								config: helper.config
+							}
+						]);
+					});
 			});
 		});
 	});

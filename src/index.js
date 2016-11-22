@@ -39,27 +39,21 @@ module.exports = argv['plugin-build'] !== true ? {} : {
 			const self = this;
 			const outputPath = helper.getOutput();
 
-			return new Promise((resolve) => {
-				// Create output dir
-				mkdirp(path.parse(outputPath).dir, (mkdirpErr) => {
-					if (mkdirpErr) return self.log.error(mkdirpErr.message);
+			// Render template.
+			const rawContent = helper.renderTemp({summary: helper.summary});
 
-					// Compile rendered main file
-					helper.pandocCompile(helper.renderTemp({summary: helper.summary}), (pandocErr, content) => {
-						if (pandocErr) return self.log.error(pandocErr.message);
+			// Create output dir.
+			mkdirp.sync(path.parse(outputPath).dir);
 
-						// Write file to outputpath
-						fs.writeFile(outputPath, content, (fsErr) => {
-							if (fsErr) return self.log.error(fsErr.message);
-
-							// Log action
-							this.log.info(`plugin-build(${pac.version}) output:`, helper.config.output);
-
-							resolve();
-						});
-					});
+			// Compile rendered main file
+			return helper.pandocCompile(rawContent)
+				.then((compiledContent) => {
+					// Write file to output dir.
+					fs.writeFileSync(outputPath, compiledContent);
+				}).then(() => {
+					// Log action.
+					self.log.info('plugin-build(output):', helper.config.output);
 				});
-			});
 		},
 
 		/**
@@ -76,7 +70,9 @@ module.exports = argv['plugin-build'] !== true ? {} : {
 				}
 			});
 
+			// Returns unchanged page.
 			return page;
 		}
 	}
-};
+}
+;

@@ -8,7 +8,6 @@ const fs = require('fs');
 const path = require('path');
 const argv = require('yargs').argv;
 const helper = require('./helper');
-const pac = require('../package.json');
 
 /**
  * Module for defining gitbook plugin.

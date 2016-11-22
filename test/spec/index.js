@@ -1,61 +1,37 @@
 'use strict';
 
+process.argv = process.argv.concat(['--plugin-build']);
+
 const assert = require('assert');
 const sinon = require('sinon');
+const index = require('../../src/index');
+const helper = require('../../src/helper');
 
 /**
  * @test module:index
  */
 describe('index', () => {
 
-	const indexPath = '../../src/index';
-	const helperPath = '../../src/helper';
-	const argv = process.argv;
-	let index;
-	let helper;
-
-	beforeEach(() => {
-		// Delete catche.
-		delete require.cache[require.resolve(indexPath)];
-		delete require.cache[require.resolve(helperPath)];
-		delete require.cache[require.resolve('yargs')];
-
-		// Setup cli arguments.
-		process.argv = argv.concat(['--plugin-build']);
-		index = require(indexPath); // eslint-disable-line
-
-		helper = require(helperPath);
-		this.helperInit = sinon.stub(helper, 'init');
-	});
-
-	afterEach(() => {
-		this.helperInit.restore();
-	});
-
-	it('should return blank object if no flag in argv', () => {
-		// Delete catche.
-		delete require.cache[require.resolve(indexPath)];
-		delete require.cache[require.resolve('yargs')];
-
-		// Setup cli arguments.
-		process.argv = [];
-		index = require(indexPath); // eslint-disable-line
-
-		assert.deepEqual(index, {});
-	});
-
 	/**
 	 * @test module:index~hooks.init
 	 */
 	describe('~hooks.init', () => {
 		beforeEach(() => {
-			let article = 0;
-			index.hooks.init.prototype.book = {
-				summary : {
-					walk: (cb) => cb(article++)
+			this.init = sinon.stub(helper, 'init');
+			this.article = sinon.stub();
+
+			index.hooks.book = {
+				summary: {
+					walk: (cb) => cb(this.article)
 				}
 			};
+
+			helper.summary = [];
 			index.hooks.init();
+		});
+
+		afterEach(() => {
+			this.init.restore();
 		});
 
 		it('should exist and is function', () => {
@@ -63,11 +39,11 @@ describe('index', () => {
 		});
 
 		it('inits helper', () => {
-			assert(this.helperInit.withArgs(index.hooks).calledOnce);
+			assert(this.init.withArgs(index.hooks).calledOnce);
 		});
 
 		it('fills helper summary', () => {
-			assert.equal(helper.summary.sort(),[]);
+			assert.deepEqual(helper.summary, [this.article]);
 		});
 	});
 

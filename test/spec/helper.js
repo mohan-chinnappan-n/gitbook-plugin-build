@@ -13,6 +13,7 @@ describe('module:helper', () => {
 	let ctx;
 
 	beforeEach(() => {
+		delete require.cache[require.resolve(helperPath)];
 		helper = require(helperPath); // eslint-disable-line
 		ctx = {
 			book: {
@@ -32,10 +33,6 @@ describe('module:helper', () => {
 		};
 
 		helper.init(ctx);
-	});
-
-	afterEach(() => {
-		delete require.cache[require.resolve(helperPath)];
 	});
 
 	it('returns Helper instance', () => {

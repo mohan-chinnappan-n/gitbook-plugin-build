@@ -65,24 +65,34 @@ class Helper {
 	renderTemp(config) {
 		let error = false;
 		let content;
+		let fileStat;
+		let isTemp = {
+			file: false,
+			dir: false
+		};
 
 		try {
-			const stat = fs.statSync(this.config.template);
-
-			if (stat.isFile() && !stat.isDirectory()) {
-				// If template exist render with ejs.
-				content = ejs.render(
-					fs.readFileSync(this.getSrc(this.config.template), 'utf-8'),
-					config
-				);
-			} else {
-				error = true;
-			}
-		}
-		catch (err) {
+			fileStat = fs.statSync(this.config.template);
+			isTemp.file = fileStat.isFile();
+			isTemp.dir = fileStat.isDirectory();
+		} catch (err) {
 			// On template fail log error.
 			this.log.warn('plugin-build:', err.message);
+		}
 
+		if (isTemp.file && !isTemp.dir) {
+			// If template exist render with ejs.
+			const rawContent = fs.readFileSync(this.getSrc(this.config.template), 'utf-8');
+			try{
+				content = ejs.render( rawContent, config );
+			} catch (err) {
+				// If template syntax is corrupted throw error.
+				throw new Error(`Template error: ${this.config.template}\n${err.message}`);
+			}
+		} else if (isTemp.dir) {
+			// If template is directory throw error.
+			throw new Error(`Template path is not file: ${this.config.template}`);
+		} else {
 			// If template not exist create without templating.
 			content = '';
 			config.summary.forEach((article) => {
@@ -90,10 +100,7 @@ class Helper {
 			});
 		}
 
-		// Throw error if template path is folder.
-		if (error) throw new Error(`Template path is not file: ${this.config.template}`);
-
-		// Returns content.
+		// Returns content on the end.
 		return content;
 	}
 
@@ -111,10 +118,19 @@ class Helper {
 	 * @param cb {strCallback} Callback for compiled content.
 	 */
 	pandocCompile(html, cb) {
+		// Add standalone flag to pandoc arguments.
 		const args = this.config.args
 			.concat(['--standalone'])
-			.filter((v, i, a) => a.indexOf(v) === i);
+			.filter((v, i, a) => a.indexOf(v) === i)
+			.sort();
 
+		// Logs compile configuration.
+		this.log.debug('plugin-build(compile):', {
+			args,
+			config: this.config
+		});
+
+		// Compile html string.
 		pdc(html,
 			'html',
 			this.config.format,
@@ -123,6 +139,7 @@ class Helper {
 			(err, result) => {
 				if (err) return cb(err);
 
+				// Call callback with (err, result).
 				cb(null, result);
 			});
 	}

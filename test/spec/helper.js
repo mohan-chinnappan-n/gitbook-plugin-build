@@ -2,47 +2,50 @@
 
 const sinon = require('sinon');
 const assert = require('assert');
-const fs = require('fs');
 const path = require('path');
 
 /**
  * @test module:helper
  */
 describe('module:helper', () => {
+	const helperPath = '../../src/helper';
+	let helper;
+	let ctx;
+
+	beforeEach(() => {
+		helper = require(helperPath); // eslint-disable-line
+		ctx = {
+			book: {
+				resolve: sinon.stub()
+			},
+			log: {
+				warn: sinon.stub(),
+				error: sinon.stub(),
+				info: sinon.stub(),
+				debug: sinon.stub()
+			},
+			options: {
+				pluginsConfig: {
+					build: sinon.stub()
+				}
+			}
+		};
+
+		helper.init(ctx);
+	});
+
+	afterEach(() => {
+		delete require.cache[require.resolve(helperPath)];
+	});
+
+	it('returns Helper instance', () => {
+		assert.equal(helper.constructor.name, 'Helper');
+	});
+
 	/**
 	 * @test Helper
 	 */
 	describe('Helper', () => {
-
-		let helper;
-		const helperPath = '../../src/helper';
-		let ctx;
-
-		beforeEach(() => {
-			helper = require(helperPath);
-			ctx = {
-				book: {
-					resolve: sinon.stub()
-				},
-				log: {
-					warn: sinon.stub(),
-					error: sinon.stub(),
-					info: sinon.stub()
-				},
-				options: {
-					pluginsConfig: {
-						build: sinon.stub()
-					}
-				}
-			};
-
-			helper.init(ctx);
-		});
-
-		afterEach(() => {
-			delete require.cache[require.resolve(helperPath)]
-		});
-
 		/**
 		 * @test module:helper~Helper#init
 		 * @test module:helper~Helper#getSrc
@@ -73,9 +76,9 @@ describe('module:helper', () => {
 					]
 				};
 
-				helper.getSrc = (path) => path;
+				helper.getSrc = FilePath => FilePath;
 				helper.config = {
-					template: path.join(__dirname, '../resources/helper/renderTemp') + '/'
+					template: `${path.join(__dirname, '../resources/helper/renderTemp')}/`
 				};
 			});
 
@@ -100,11 +103,22 @@ describe('module:helper', () => {
 
 			it('throw error if template path is folder', (done) => {
 				helper.config.template += 'folder';
-				try{
+				try {
 					helper.renderTemp(this.config);
 					done('Should not pass');
-				} catch (err){
+				} catch (err) {
 					assert(/Template path is not file: .*folder/.test(err.message));
+					done();
+				}
+			});
+
+			it('throw error on ejs fail', (done) => {
+				helper.config.template += 'main_err';
+				try {
+					helper.renderTemp(this.config);
+					done('Should not pass');
+				} catch (err) {
+					assert(/Template error: .*main_err.*NOT_EXIST is not defined.*/.test(err.message.split('\n').join(' ')));
 					done();
 				}
 			});
@@ -114,14 +128,56 @@ describe('module:helper', () => {
 		 * @test module:helper~Helper#getOutput
 		 */
 		describe('#getOutput', () => {
-
+			beforeEach(() => {
+				helper.config.output = 'helper.config.output';
+				this.return = sinon.stub();
+				helper.getSrc = () => this.return;
+			});
+			it('returns full src path from relative path', () => {
+				assert.equal(helper.getOutput(), this.return);
+			});
 		});
 
 		/**
 		 * @test module:helper~Helper#pandocCompile
 		 */
 		describe('#pandocCompile', () => {
+			beforeEach(() => {
+				helper.config = {
+					format: 'markdown',
+					opts: {},
+					args: []
+				};
+			});
 
+			it('returns compiled html from callback and logs', (done) => {
+				helper.pandocCompile('<p>hello world</p>', (err, result) => {
+					if (err) done(err);
+					assert.equal(result, 'hello world\n');
+					assert.deepEqual(helper.log.debug.getCalls()[0].args, [
+						'plugin-build(compile):', {
+							args: ['--standalone'].sort(),
+							config: helper.config
+						}
+					]);
+					done();
+				});
+			});
+
+			it('filter config args and sort it', (done) => {
+				helper.config.args = ['--standalone', '--standalone', '--verbose'];
+
+				helper.pandocCompile('<p>hello world</p>', (err) => {
+					if (err) done(err);
+					assert.deepEqual(helper.log.debug.getCalls()[0].args, [
+						'plugin-build(compile):', {
+							args: ['--verbose', '--standalone'].sort(),
+							config: helper.config
+						}
+					]);
+					done();
+				});
+			});
 		});
 	});
 });

@@ -1,6 +1,6 @@
 {
 	"name": "gitbook-plugin-build",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Extends gitbook build system with pandoc converter.",
 	"main": "./src/index.js",
 	"license": "MIT",
@@ -26,6 +26,16 @@
 	"files": [
 		"src"
 	],
+	"gitbook": {
+		"bin": "pandoc",
+		"args": [],
+		"opts": {},
+		"template": "_layouts/main.tex",
+		"output": {
+			"path": "main.tex",
+			"format": "latex"
+		}
+	},
 	"engines": {
 		"node": ">=4.0.0",
 		"gitbook": ">1.x.x"
@@ -37,7 +47,6 @@
 	},
 	"dependencies": {
 		"ejs": "^2.5.2",
-		"merge": "^1.2.0",
 		"mkdirp": "^0.5.1",
 		"pdc": "^0.2.3",
 		"yargs": "^6.4.0"

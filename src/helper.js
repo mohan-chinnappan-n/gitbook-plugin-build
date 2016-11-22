@@ -1,10 +1,8 @@
 'use strict';
 
-const merge = require('merge');
 const fs = require('fs');
 const pdc = require('pdc');
 const ejs = require('ejs');
-const defaultConfig = require('./config.json');
 
 /**
  * Module that hold all hard logic.
@@ -45,7 +43,7 @@ class Helper {
 		// Set labels
 		this.getSrc = ctx.book.resolve;
 		this.log = ctx.log;
-		this.config = merge.recursive(defaultConfig, ctx.options.pluginsConfig.build);
+		this.config = ctx.options.pluginsConfig.build;
 	}
 
 	/**

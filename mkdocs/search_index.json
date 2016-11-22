@@ -1,0 +1,134 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Extends gitbook build system with pandoc converter.\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\nProject is still in development!\nPlease see project \nmilestones\n\nto see when the first production ready version will come out.\n\n\n\n\n\n\nDescription\n#\n\n\nGPP\n (gitbook-plugin-build) extends \ngitbook\n\nbuild system with \npandoc\n converter. Pandoc is your\nswiss-army knife when it comes to coverting files. \nGPP\n use pandoc\nbuild system to convert and compile your book in variety of formats...\n\n\n\n\nTeX formats\n: LaTeX, ConTeXt, LaTeX Beamer slides\n\n\nHTML formats\n: XHTML, HTML5, and HTML slide shows using Slidy, reveal.js, Slideous, S5, or DZSlides.\n\n\nWord processor formats\n: Microsoft Word docx, OpenOffice/LibreOffice ODT, OpenDocument XML\n\n\nEbooks\n: EPUB version 2 or 3, FictionBook2\n\n\nDocumentation formats\n: DocBook, TEI Simple, GNU TexInfo, Groff man pages, Haddock markup\n\n\nPage layout formats\n: InDesign ICML\n\n\nOutline formats\n: OPML\n\n\nPDF via LaTeX\n\n\nLightweight markup formats\n: Markdown (including CommonMark), reStructuredText, AsciiDoc, MediaWiki markup, DokuWiki markup, Emacs Org-Mode, Textile\n\n\n\n\nWriting books with this plugin will be peace of cake. And here cake is \nnot a lie\n!\n\n\nLicense\n#\n\n\nCopyright \u00a9 2016 Uro\u0161 Jarc\n\n\nMIT License", 
+            "title": "Project"
+        }, 
+        {
+            "location": "/#description", 
+            "text": "GPP  (gitbook-plugin-build) extends  gitbook \nbuild system with  pandoc  converter. Pandoc is your\nswiss-army knife when it comes to coverting files.  GPP  use pandoc\nbuild system to convert and compile your book in variety of formats...   TeX formats : LaTeX, ConTeXt, LaTeX Beamer slides  HTML formats : XHTML, HTML5, and HTML slide shows using Slidy, reveal.js, Slideous, S5, or DZSlides.  Word processor formats : Microsoft Word docx, OpenOffice/LibreOffice ODT, OpenDocument XML  Ebooks : EPUB version 2 or 3, FictionBook2  Documentation formats : DocBook, TEI Simple, GNU TexInfo, Groff man pages, Haddock markup  Page layout formats : InDesign ICML  Outline formats : OPML  PDF via LaTeX  Lightweight markup formats : Markdown (including CommonMark), reStructuredText, AsciiDoc, MediaWiki markup, DokuWiki markup, Emacs Org-Mode, Textile   Writing books with this plugin will be peace of cake. And here cake is  not a lie !", 
+            "title": "Description"
+        }, 
+        {
+            "location": "/#license", 
+            "text": "Copyright \u00a9 2016 Uro\u0161 Jarc  MIT License", 
+            "title": "License"
+        }, 
+        {
+            "location": "/getStarted/", 
+            "text": "Get started\n#\n\n\nInstalation \n Setup\n#\n\n\n\n\nFollow \nthis steps\n to install pandoc.\n\n\nAdd pandoc binaries to your path which is highly recommended.\n\n\nFollow \nthis steps\n to install gitbook.\n\n\nCreate initial gitbook project arhitecture and test if you can execute \ngitbook build\n command with success.\n\n\n\n\nPlugin setup\n#\n\n\n\n\nAdd \nGPP\n plugin to \n(book.json).plugins\n array, see gitbook \ninfo about plugins\n.\n\n\n\n\nAdd \nGPP\n configuration to \n(book.json).pluginsConfig.build\n object, or leave it empty to use default configuration...\n\n\njson\n{\n  \"bin\": \"pandoc\",                  # Pandoc binaries.\n  \"args\": [],                       # Arguments passed to pandoc on build.\n  \"opts\": {},                       # Options passed to pandoc on build.\n  \"template\": \"_layouts/main.tex\",  # Build template.\n  \"output\": {\n    \"path\": \"build/main.tex\",       # Output path for build.\n    \"format\": \"latex\"               # Pandoc output format.\n  }\n}\n\n\n\n\n\n\nTo se which formats\n\n\n\n\n\n\nUsage\n#\n\n\nAdd \n--plugin-build\n flag to you gitbook command to start \nGPP\n build.\n\nGPP\n will create output file base on \ngitbook summary file\n...\n\n\ngitbook serve --plugin-build\ngitbook build --plugin-build\n\n\n\n\n\nTemplate\n#\n\n\nIf you don't like how \nGPP\n creates output file you can setup custom\ntemplate which will follow your rules for compiling output file.\n\n\n\n\nCreate file on path \n(book.json).pluginsConfig.build.template\n.\n\n\n\n\nUse \nejs templating\n to parse \nsummary\n array. Here is default template...\n\n\njavascript\n\n% for(let article in summary) {%\n\n\n%- article.content %\n\n\n% } %\n\n\n\n\n\n\nArticle object (\nsummary[i]\n) structure... \n\n\njson\n{\n  \"title\": \nString\n,    // Summary title.\n  \"content\": \nString\n,  // Compiled content.\n  \"path\": \nString\n,     // Relative source file path.\n  \"rawPath\": \nString\n,  // Full source file path.\n  \"type\": \nString\n      // Src file type (markdown or asciidoc).\n}", 
+            "title": "Get started"
+        }, 
+        {
+            "location": "/getStarted/#get-started", 
+            "text": "", 
+            "title": "Get started"
+        }, 
+        {
+            "location": "/getStarted/#instalation-setup", 
+            "text": "Follow  this steps  to install pandoc.  Add pandoc binaries to your path which is highly recommended.  Follow  this steps  to install gitbook.  Create initial gitbook project arhitecture and test if you can execute  gitbook build  command with success.", 
+            "title": "Instalation &amp; Setup"
+        }, 
+        {
+            "location": "/getStarted/#plugin-setup", 
+            "text": "Add  GPP  plugin to  (book.json).plugins  array, see gitbook  info about plugins .   Add  GPP  configuration to  (book.json).pluginsConfig.build  object, or leave it empty to use default configuration...  json\n{\n  \"bin\": \"pandoc\",                  # Pandoc binaries.\n  \"args\": [],                       # Arguments passed to pandoc on build.\n  \"opts\": {},                       # Options passed to pandoc on build.\n  \"template\": \"_layouts/main.tex\",  # Build template.\n  \"output\": {\n    \"path\": \"build/main.tex\",       # Output path for build.\n    \"format\": \"latex\"               # Pandoc output format.\n  }\n}    To se which formats", 
+            "title": "Plugin setup"
+        }, 
+        {
+            "location": "/getStarted/#usage", 
+            "text": "Add  --plugin-build  flag to you gitbook command to start  GPP  build. GPP  will create output file base on  gitbook summary file ...  gitbook serve --plugin-build\ngitbook build --plugin-build", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/getStarted/#template", 
+            "text": "If you don't like how  GPP  creates output file you can setup custom\ntemplate which will follow your rules for compiling output file.   Create file on path  (book.json).pluginsConfig.build.template .   Use  ejs templating  to parse  summary  array. Here is default template...  javascript % for(let article in summary) {%  %- article.content %  % } %    Article object ( summary[i] ) structure...   json\n{\n  \"title\":  String ,    // Summary title.\n  \"content\":  String ,  // Compiled content.\n  \"path\":  String ,     // Relative source file path.\n  \"rawPath\":  String ,  // Full source file path.\n  \"type\":  String       // Src file type (markdown or asciidoc).\n}", 
+            "title": "Template"
+        }, 
+        {
+            "location": "/contribution/", 
+            "text": "I would love for you to contribute to our source code and to make \nGPP\n even better than it is\ntoday! Here are the guidelines for you to follow...\n\n\nGot a Question?\n#\n\n\nIf you have questions about how to use \nGPP\n, please create new issue\nin which you point out which section of documentation is lacking with information.\n\n\nFound an Issue?\n#\n\n\nIf you find a bug in the source code or a mistake in the documentation, you can help by\nsubmitting an issue to our \nGitHub Repository\n. Even better you can submit a Pull Request\nwith a fix.\n\n\nWant a Feature?\n#\n\n\nYou can request a new feature by submitting an issue to our \nGitHub Repository\n.  If you\nwould like to implement a new feature then consider what kind of change it is:\n\n\n\n\nMajor Changes\n that you wish to contribute to the project make an issue explaining details.\n  so that I can better coordinate efforts, prevent duplication of work, and help you to\n  craft the change so that it is successfully accepted into the project.\n\n\nSmall Changes\n can be crafted and submitted to the \nGitHub Repository\n as a Pull\n  Request.\n\n\n\n\nWant a Doc Fix?\n#\n\n\nIf you want to help improve the docs, it's a good idea to let others know what you're working on to\nminimize duplication of effort. Create a new issue (or comment on a related existing one) to let\nothers know what you're working on.\n\n\nSubmitting an Issue\n#\n\n\nBefore you submit your issue search the archive, maybe your question was already answered.\n\n\nIf your issue appears to be a bug, and hasn't been reported, open a new issue. Help to maximize\nthe effort on fixing issues and adding new features, by not reporting duplicate issues.\nProviding the following information will increase the chances of your issue being dealt with\nquickly:\n\n\n\n\nOverview of the Issue\n - if an error is being thrown a non-minified stack trace helps\n\n\nDebug log file\n - Use \ngitbook build --debug\n to create debug log file.\n\n\nMotivation for or Use Case\n - explain why this is a bug for you.\n\n\nRelated Issues\n - has a similar issue been reported before?\n\n\nSuggest a Fix\n - if you can't fix the bug yourself, perhaps you can point to what might be\n  causing the problem (line of code or commit)\n\n\n\n\nIf you get help, help others. Good karma rulez!\n\n\nSubmitting a Pull Request\n#\n\n\nBefore you submit your pull request consider the following guidelines:\n\n\n\n\nSearch \nGitHub\n for an open or closed Pull Request\n  that relates to your submission. You don't want to duplicate effort.\n\n\n\n\nMake your changes in a new git branch:\n\n\ngit checkout -b my-fix-branch master\n\n\n\n\n\n\nCreate your patch, \nincluding appropriate test cases\n.\n\n\n\n\n\n\nRun test suite. and ensure that all tests pass.\n\n\nnpm test\n\n\n\n\n\n\nCommit your changes using a descriptive commit message.\n\n\n\n\n\n\nPush your branch to GitHub:\n\n\ngit push origin my-fix-branch\n\n\n\n\n\n\nIn GitHub, send a pull request to \ngitbook-plugin-build:master\n.\n\n\nThat's it! Thank you for your contribution!\n\n\nCoding Rules\n#\n\n\nTo ensure consistency throughout the source code, keep these rules in mind as you are working:\n\n\n\n\nAll features or bug fixes \nmust be tested\n by one or more [specs][unit-testing].\n\n\nAll public API methods \nmust be documented\n with jsdoc3.\n\n\nUse our set of linting rules.", 
+            "title": "Contribution"
+        }, 
+        {
+            "location": "/contribution/#got-a-question", 
+            "text": "If you have questions about how to use  GPP , please create new issue\nin which you point out which section of documentation is lacking with information.", 
+            "title": "Got a Question?"
+        }, 
+        {
+            "location": "/contribution/#found-an-issue", 
+            "text": "If you find a bug in the source code or a mistake in the documentation, you can help by\nsubmitting an issue to our  GitHub Repository . Even better you can submit a Pull Request\nwith a fix.", 
+            "title": "Found an Issue?"
+        }, 
+        {
+            "location": "/contribution/#want-a-feature", 
+            "text": "You can request a new feature by submitting an issue to our  GitHub Repository .  If you\nwould like to implement a new feature then consider what kind of change it is:   Major Changes  that you wish to contribute to the project make an issue explaining details.\n  so that I can better coordinate efforts, prevent duplication of work, and help you to\n  craft the change so that it is successfully accepted into the project.  Small Changes  can be crafted and submitted to the  GitHub Repository  as a Pull\n  Request.", 
+            "title": "Want a Feature?"
+        }, 
+        {
+            "location": "/contribution/#want-a-doc-fix", 
+            "text": "If you want to help improve the docs, it's a good idea to let others know what you're working on to\nminimize duplication of effort. Create a new issue (or comment on a related existing one) to let\nothers know what you're working on.", 
+            "title": "Want a Doc Fix?"
+        }, 
+        {
+            "location": "/contribution/#submitting-an-issue", 
+            "text": "Before you submit your issue search the archive, maybe your question was already answered.  If your issue appears to be a bug, and hasn't been reported, open a new issue. Help to maximize\nthe effort on fixing issues and adding new features, by not reporting duplicate issues.\nProviding the following information will increase the chances of your issue being dealt with\nquickly:   Overview of the Issue  - if an error is being thrown a non-minified stack trace helps  Debug log file  - Use  gitbook build --debug  to create debug log file.  Motivation for or Use Case  - explain why this is a bug for you.  Related Issues  - has a similar issue been reported before?  Suggest a Fix  - if you can't fix the bug yourself, perhaps you can point to what might be\n  causing the problem (line of code or commit)   If you get help, help others. Good karma rulez!", 
+            "title": "Submitting an Issue"
+        }, 
+        {
+            "location": "/contribution/#submitting-a-pull-request", 
+            "text": "Before you submit your pull request consider the following guidelines:   Search  GitHub  for an open or closed Pull Request\n  that relates to your submission. You don't want to duplicate effort.   Make your changes in a new git branch:  git checkout -b my-fix-branch master    Create your patch,  including appropriate test cases .    Run test suite. and ensure that all tests pass.  npm test    Commit your changes using a descriptive commit message.    Push your branch to GitHub:  git push origin my-fix-branch    In GitHub, send a pull request to  gitbook-plugin-build:master .  That's it! Thank you for your contribution!", 
+            "title": "Submitting a Pull Request"
+        }, 
+        {
+            "location": "/contribution/#coding-rules", 
+            "text": "To ensure consistency throughout the source code, keep these rules in mind as you are working:   All features or bug fixes  must be tested  by one or more [specs][unit-testing].  All public API methods  must be documented  with jsdoc3.  Use our set of linting rules.", 
+            "title": "Coding Rules"
+        }, 
+        {
+            "location": "/developers/", 
+            "text": "This document describes how to set up your development environment to build and test project. \nIt also explains the basic mechanics of using \ngit\n, \nnode\n, \nnpm\n, \ngulp\n.\n\n\nSee the \ncontribution guidelines\n\nif you'd like to contribute.\n\n\nPrerequisite Software\n#\n\n\nBefore you can build and test project, you must install and configure the\nfollowing products on your development machine:\n\n\n\n\n\n\nGit\n and/or the \nGitHub app\n (for \nMac\n or\n  \nWindows\n); \nGitHub's Guide to Installing\n  Git\n is a good source of information.\n\n\n\n\n\n\nNode.js\n, (version \n= 4 \n 6\n) which is used to run,\n  run tests, source files. We also use Node's Package Manager, \nnpm\n\n  which comes with Node. Depending on your system, you can install Node either from\n  source or as a pre-packaged bundle.\n\n\n\n\n\n\nGetting the Sources\n#\n\n\nFork and clone the project repository:\n\n\n\n\nLogin to your GitHub account or create one by following the instructions given\n   \nhere\n.\n\n\nFork\n the \n   \nmain project repository\n.\n\n\nClone your fork of the project repository and define an \nupstream\n remote pointing back to\n   the project repository that you forked in the first place.\n\n\n\n\n# Clone your GitHub repository:\n\ngit clone git@github.com:\ngithub username\n/gitbook-plugin-build.git\n\n\n# Go to the project directory:\n\n\ncd\n gitbook-plugin-build\n\n\n# Add the main project repository as an upstream remote to your repository:\n\ngit remote add upstream https://github.com/urosjarc/gitbook-plugin-build.git\n\n\n\n\n\nInstalling NPM Modules\n#\n\n\nNext, install the JavaScript modules needed to build and test project:\n\n\n# Install project dependencies (package.json)\n\nnpm install\n\n\n\n\n\nOptional\n: In this document, we make use of project local \nnpm\n package scripts and binaries\n(stored under \n./node_modules/.bin\n) by prefixing these command invocations with \n$(npm bin)\n; in\nparticular \ngulp\n commands. If you prefer, you can drop this path prefix by either:\n\n\nOption 1\n: globally installing these two packages as follows:\n\n\n\n\nnpm install -g gulp\n (you might need to prefix this command with \nsudo\n)\n\n\n\n\nSince global installs can become stale, and required versions can vary by project, we avoid their\nuse in these instructions.\n\n\nRunning Tests Locally\n#\n\n\n#Runing test suite:\n\nnpm \ntest\n\n\n\n\n\n\nGulp help\n#\n\n\ngulp \nhelp", 
+            "title": "Developers"
+        }, 
+        {
+            "location": "/developers/#prerequisite-software", 
+            "text": "Before you can build and test project, you must install and configure the\nfollowing products on your development machine:    Git  and/or the  GitHub app  (for  Mac  or\n   Windows );  GitHub's Guide to Installing\n  Git  is a good source of information.    Node.js , (version  = 4   6 ) which is used to run,\n  run tests, source files. We also use Node's Package Manager,  npm \n  which comes with Node. Depending on your system, you can install Node either from\n  source or as a pre-packaged bundle.", 
+            "title": "Prerequisite Software"
+        }, 
+        {
+            "location": "/developers/#getting-the-sources", 
+            "text": "Fork and clone the project repository:   Login to your GitHub account or create one by following the instructions given\n    here .  Fork  the \n    main project repository .  Clone your fork of the project repository and define an  upstream  remote pointing back to\n   the project repository that you forked in the first place.   # Clone your GitHub repository: \ngit clone git@github.com: github username /gitbook-plugin-build.git # Go to the project directory:  cd  gitbook-plugin-build # Add the main project repository as an upstream remote to your repository: \ngit remote add upstream https://github.com/urosjarc/gitbook-plugin-build.git", 
+            "title": "Getting the Sources"
+        }, 
+        {
+            "location": "/developers/#installing-npm-modules", 
+            "text": "Next, install the JavaScript modules needed to build and test project:  # Install project dependencies (package.json) \nnpm install  Optional : In this document, we make use of project local  npm  package scripts and binaries\n(stored under  ./node_modules/.bin ) by prefixing these command invocations with  $(npm bin) ; in\nparticular  gulp  commands. If you prefer, you can drop this path prefix by either:  Option 1 : globally installing these two packages as follows:   npm install -g gulp  (you might need to prefix this command with  sudo )   Since global installs can become stale, and required versions can vary by project, we avoid their\nuse in these instructions.", 
+            "title": "Installing NPM Modules"
+        }, 
+        {
+            "location": "/developers/#running-tests-locally", 
+            "text": "#Runing test suite: \nnpm  test", 
+            "title": "Running Tests Locally"
+        }, 
+        {
+            "location": "/developers/#gulp-help", 
+            "text": "gulp  help", 
+            "title": "Gulp help"
+        }, 
+        {
+            "location": "/documentation/", 
+            "text": "gitbook-plugin-build\n#\n\n\nThis is official project documentation for\n\ngitbook-plugin-build\n project.", 
+            "title": "Documentation"
+        }, 
+        {
+            "location": "/documentation/#gitbook-plugin-build", 
+            "text": "This is official project documentation for gitbook-plugin-build  project.", 
+            "title": "gitbook-plugin-build"
+        }, 
+        {
+            "location": "/changelog/", 
+            "text": "* \nThis Change Log was automatically generated by \ngithub_changelog_generator", 
+            "title": "Changelog"
+        }
+    ]
+}

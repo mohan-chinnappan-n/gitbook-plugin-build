@@ -1,6 +1,6 @@
 {
 	"name": "gitbook-plugin-build",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Extends gitbook build system with pandoc converter.",
 	"main": "./src/index.js",
 	"license": "MIT",

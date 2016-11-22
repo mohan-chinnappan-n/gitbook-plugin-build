@@ -25,7 +25,7 @@
 [codestyle-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build
 [dep]: https://david-dm.org/urosjarc/gitbook-plugin-build.svg
 [dep-url]: https://david-dm.org/urosjarc/gitbook-plugin-build
-[docs]: http://inch-ci.org/github/urosjarc/gitbook-plugin-build.svg?style=shields
+[docs]: http://inch-ci.org/github/urosjarc/gitbook-plugin-build.svg?branch=master
 [docs-url]: http://inch-ci.org/github/urosjarc/gitbook-plugin-build
 [chat]: https://badges.gitter.im/Join%20Chat.svg
 [chat-url]: https://gitter.im/urosjarc/gitbook-plugin-build?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge

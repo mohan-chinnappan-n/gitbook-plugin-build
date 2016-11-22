@@ -1,0 +1,65 @@
+{
+	"root": true,
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"impliedStrict": true,
+		"sourceType": "script"
+	},
+	"env": {
+		"mocha": true,
+		"node": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"airbnb-base"
+	],
+	"rules": {
+		"import/no-extraneous-dependencies": [
+			"error",
+			{
+				"devDependencies": [
+					"config/jsdocPlugins/**",
+					"**/test/**",
+					"**/gulpfile.js"
+				],
+				"optionalDependencies": false
+			}
+		],
+		"max-len": [
+			"error",
+			120
+		],
+		"indent": [
+			"error",
+			"tab"
+		],
+		"object-curly-spacing": [
+			"error",
+			"never"
+		],
+		"comma-dangle": [
+			"error",
+			"never"
+		],
+		"require-jsdoc": [
+			"error",
+			{
+				"require": {
+					"FunctionDeclaration": true,
+					"MethodDefinition": true,
+					"ClassDeclaration": true
+				}
+			}
+		],
+		"no-param-reassign": [
+			"error",
+			{
+				"props": false
+			}
+		],
+		"no-else-return": "off",
+		"valid-jsdoc": "off",
+		"no-tabs": "off",
+		"consistent-return": "off"
+	}
+}

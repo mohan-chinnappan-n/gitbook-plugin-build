@@ -1,4 +1,4 @@
-![Project logo](docs/media/header.png?raw=true)
+![Project logo](media/header.png?raw=true)
 
 <br>
 
@@ -36,12 +36,19 @@
 
 <br>
 
+!!! Warning
+    Project is still in development!
+    Please see project [milestones](https://github.com/urosjarc/gitbook-plugin-build/milestones)
+    to see when the first production ready version will come out.
+
+<br>
+
 ## Description
 
 **GPP** (gitbook-plugin-build) extends [gitbook](https://www.gitbook.com/)
 build system with [pandoc](http://pandoc.org/) converter. Pandoc is your
 swiss-army knife when it comes to coverting files. **GPP** use pandoc
-build system to convert and compile your book in variety of formats:
+build system to convert and compile your book in variety of formats...
 
 * **TeX formats**: LaTeX, ConTeXt, LaTeX Beamer slides
 * **HTML formats**: XHTML, HTML5, and HTML slide shows using Slidy, reveal.js, Slideous, S5, or DZSlides.
@@ -54,14 +61,6 @@ build system to convert and compile your book in variety of formats:
 * **Lightweight markup formats**: Markdown (including CommonMark), reStructuredText, AsciiDoc, MediaWiki markup, DokuWiki markup, Emacs Org-Mode, Textile
 
 Writing books with this plugin will be peace of cake. And here cake is **not a lie**!
-
-<br>
-
-## Homepage
-For more informations please visit projects official homepage.
-> [https://urosjarc.github.io/gitbook-plugin-build](https://urosjarc.github.io/gitbook-plugin-build)
-
-<br>
 
 ## License
 Copyright © 2016 Uroš Jarc

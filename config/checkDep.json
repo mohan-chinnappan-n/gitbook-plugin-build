@@ -1,0 +1,5 @@
+{
+	"failForDevDependencies": true,
+	"failForGitDependencies": true,
+	"failForPrerelease": true
+}

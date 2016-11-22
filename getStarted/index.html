@@ -152,7 +152,7 @@
         <strong>
           gitbook-plugin-build
           <span class="version">
-            0.0.1
+            0.0.5
           </span>
         </strong>
         
@@ -168,7 +168,7 @@
         <ul class="repo">
           <li class="repo-download">
             
-            <a href="https://github.com/urosjarc/gitbook-plugin-build/archive/0.0.1.zip" target="_blank" title="Download" data-action="download">
+            <a href="https://github.com/urosjarc/gitbook-plugin-build/archive/0.0.5.zip" target="_blank" title="Download" data-action="download">
               <i class="icon icon-download"></i> Download
             </a>
           </li>
@@ -304,33 +304,34 @@
           
           <h1 id="get-started">Get started<a class="headerlink" href="#get-started" title="Permanent link">#</a></h1>
 <h2 id="instalation-setup">Instalation &amp; Setup<a class="headerlink" href="#instalation-setup" title="Permanent link">#</a></h2>
-<ol>
+<ul>
 <li>Follow <a href="http://pandoc.org/installing.html">this steps</a> to install pandoc.</li>
 <li>Add pandoc binaries to your path which is highly recommended.</li>
 <li>Follow <a href="https://toolchain.gitbook.com/setup.html">this steps</a> to install gitbook.</li>
 <li>Create initial gitbook project arhitecture and test if you can execute <code>gitbook build</code> command with success.</li>
-</ol>
+</ul>
 <h2 id="plugin-setup">Plugin setup<a class="headerlink" href="#plugin-setup" title="Permanent link">#</a></h2>
-<ol>
+<ul>
 <li>Add <strong>GPP</strong> plugin to <code>(book.json).plugins</code> array, see gitbook <a href="https://toolchain.gitbook.com/plugins">info about plugins</a>.</li>
-<li>
-<p>Add <strong>GPP</strong> configuration to <code>(book.json).pluginsConfig.build</code> object, or leave it empty to use default configuration...</p>
-<p><code>json
-{
-  "bin": "pandoc",                  # Pandoc binaries.
-  "args": [],                       # Arguments passed to pandoc on build.
-  "opts": {},                       # Options passed to pandoc on build.
-  "template": "_layouts/main.tex",  # Build template.
-  "output": {
-    "path": "build/main.tex",       # Output path for build.
-    "format": "latex"               # Pandoc output format.
-  }
-}</code></p>
-</li>
-<li>
-<p>To se which formats</p>
-</li>
-</ol>
+<li>Add <strong>GPP</strong> configuration to <code>(book.json).pluginsConfig.build</code> object, or leave it empty to use default configuration...</li>
+</ul>
+<div class="code"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;bin&quot;</span><span class="p">:</span> <span class="s2">&quot;pandoc&quot;</span><span class="p">,</span>                  <span class="err">#</span> <span class="err">Pandoc</span> <span class="err">binaries.</span>
+  <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[],</span>                       <span class="err">#</span> <span class="err">Arguments</span> <span class="err">passed</span> <span class="err">to</span> <span class="err">pandoc</span> <span class="err">on</span> <span class="err">build.</span>
+  <span class="nt">&quot;opts&quot;</span><span class="p">:</span> <span class="p">{},</span>                       <span class="err">#</span> <span class="err">Options</span> <span class="err">passed</span> <span class="err">to</span> <span class="err">pandoc</span> <span class="err">on</span> <span class="err">build.</span>
+  <span class="nt">&quot;template&quot;</span><span class="p">:</span> <span class="s2">&quot;_layouts/main.tex&quot;</span><span class="p">,</span>  <span class="err">#</span> <span class="err">Build</span> <span class="err">template.</span>
+  <span class="nt">&quot;output&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;build/main.tex&quot;</span><span class="p">,</span>       <span class="err">#</span> <span class="err">Output</span> <span class="err">path</span> <span class="err">for</span> <span class="err">build.</span>
+    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;latex&quot;</span>               <span class="err">#</span> <span class="err">Pandoc</span> <span class="err">output</span> <span class="err">format.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<ul>
+<li>Install gitbook plugins by running <code>gitbook install</code>.</li>
+<li>To se which formats pandoc provides check <code>man pandoc</code>.</li>
+</ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h2>
 <p>Add <code>--plugin-build</code> flag to you gitbook command to start <strong>GPP</strong> build.
 <strong>GPP</strong> will create output file base on <a href="https://toolchain.gitbook.com/pages.html">gitbook summary file</a>...</p>
@@ -342,27 +343,27 @@ gitbook build --plugin-build
 <h2 id="template">Template<a class="headerlink" href="#template" title="Permanent link">#</a></h2>
 <p>If you don't like how <strong>GPP</strong> creates output file you can setup custom
 template which will follow your rules for compiling output file.</p>
-<ol>
+<ul>
 <li>Create file on path <code>(book.json).pluginsConfig.build.template</code>.</li>
-<li>
-<p>Use <a href="http://www.embeddedjs.com/">ejs templating</a> to parse <code>summary</code> array. Here is default template...</p>
-<p><code>javascript
-&lt;% for(let article in summary) {%&gt;
-&lt;%- article.content %&gt;
-&lt;% } %&gt;</code></p>
-</li>
-<li>
-<p>Article object (<code>summary[i]</code>) structure... </p>
-<p><code>json
-{
-  "title": &lt;String&gt;,    // Summary title.
-  "content": &lt;String&gt;,  // Compiled content.
-  "path": &lt;String&gt;,     // Relative source file path.
-  "rawPath": &lt;String&gt;,  // Full source file path.
-  "type": &lt;String&gt;      // Src file type (markdown or asciidoc).
-}</code></p>
-</li>
-</ol>
+<li>Use <a href="http://www.embeddedjs.com/">ejs templating</a> to parse <code>summary</code> array. Here is default template...</li>
+</ul>
+<div class="code"><pre><span></span><span class="o">&lt;%</span> <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">article</span> <span class="k">in</span> <span class="nx">summary</span><span class="p">)</span> <span class="p">{</span><span class="o">%&gt;</span>
+<span class="o">&lt;%-</span> <span class="nx">article</span><span class="p">.</span><span class="nx">content</span> <span class="o">%&gt;</span>
+<span class="o">&lt;%</span> <span class="p">}</span> <span class="o">%&gt;</span>
+</pre></div>
+
+
+<ul>
+<li>Article object (<code>summary[i]</code>) structure... </li>
+</ul>
+<div class="code"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="err">&lt;String&gt;</span><span class="p">,</span>    <span class="err">//</span> <span class="err">Summary</span> <span class="err">title.</span>
+  <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="err">&lt;String&gt;</span><span class="p">,</span>  <span class="err">//</span> <span class="err">Compiled</span> <span class="err">content.</span>
+  <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="err">&lt;String&gt;</span><span class="p">,</span>     <span class="err">//</span> <span class="err">Relative</span> <span class="err">source</span> <span class="err">file</span> <span class="err">path.</span>
+  <span class="nt">&quot;rawPath&quot;</span><span class="p">:</span> <span class="err">&lt;String&gt;</span><span class="p">,</span>  <span class="err">//</span> <span class="err">Full</span> <span class="err">source</span> <span class="err">file</span> <span class="err">path.</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="err">&lt;String&gt;</span>      <span class="err">//</span> <span class="err">Src</span> <span class="err">file</span> <span class="err">type</span> <span class="err">(markdown</span> <span class="err">or</span> <span class="err">asciidoc).</span>
+<span class="p">}</span>
+</pre></div>
           <aside class="copyright" role="note">
             
               Copyright © 2016 Uroš Jarc &ndash;

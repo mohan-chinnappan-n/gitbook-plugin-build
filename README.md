@@ -19,12 +19,12 @@
 [npm-url]: https://www.npmjs.com/package/gitbook-plugin-build
 [travis]: https://img.shields.io/travis/urosjarc/gitbook-plugin-build.svg
 [travis-url]: https://travis-ci.org/urosjarc/gitbook-plugin-build
-[coverage]: https://img.shields.io/codacy/coverage/71b26bbc68de46ed9b6ad037d821b635.svg
+[coverage]: https://img.shields.io/codacy/coverage/574f24efb20948afac9ba998f3d159c3.svg
 [coverage-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build
-[codestyle]: https://img.shields.io/codacy/grade/71b26bbc68de46ed9b6ad037d821b635.svg
+[codestyle]: https://img.shields.io/codacy/grade/27e38bb72bdc4476b2e87e9926df0485.svg
 [codestyle-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build
-[dep]: https://www.versioneye.com/user/projects/57ed5868769f21004138875f/badge.svg?style=flat-square
-[dep-url]: https://www.versioneye.com/user/projects/57ed5868769f21004138875f
+[dep]: https://david-dm.org/urosjarc/gitbook-plugin-build.svg
+[dep-url]: https://david-dm.org/urosjarc/gitbook-plugin-build
 [docs]: http://inch-ci.org/github/urosjarc/gitbook-plugin-build.svg?style=shields
 [docs-url]: http://inch-ci.org/github/urosjarc/gitbook-plugin-build
 [chat]: https://badges.gitter.im/Join%20Chat.svg

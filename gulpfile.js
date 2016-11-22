@@ -160,11 +160,13 @@ gulp.task('inchjs', false, shell.task([
 gulp.task('changelog', 'Update docs changelog file.', (cb) => {
 	let command = 'github_changelog_generator';
 	const config = require(changelogConfig);
-	config.forEach((configEle, i) => {
-		command += ` --${i} ${configEle}`;
+	Object.keys(config).forEach((key) => {
+		command += ` --${key} ${config[key]}`;
 	});
 	shell.task([command])(cb);
 });
+
+gulp.task('docs', 'Build project documentation.', ['mkdocs', 'jsdoc']);
 
 gulp.task('mkdocs', false, shell.task([
 	`mkdocs build --strict --clean --quiet --config-file ${mkdocsConfig}`

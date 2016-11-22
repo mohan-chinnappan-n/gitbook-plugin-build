@@ -84,7 +84,7 @@ class Helper {
 			isTemp.dir = fileStat.isDirectory();
 		} catch (err) {
 			// On template fail log error.
-			this.log.warn('plugin-build:', err.message);
+			this.log.warn.ln('plugin-build: no template found');
 		}
 
 		if (isTemp.file && !isTemp.dir) {
@@ -132,10 +132,10 @@ class Helper {
 			.sort();
 
 		// Logs compile configuration.
-		this.log.debug('plugin-build(compile):', {
+		this.log.debug.ln('plugin-build(compile):', JSON.stringify({
 			args,
 			config: this.config
-		});
+		},null,2));
 
 		return new Promise((resolve,reject) => {
 			// Compile html string.

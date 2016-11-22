@@ -1,8 +1,10 @@
 'use strict';
 
+
 const sinon = require('sinon');
 const assert = require('assert');
 const path = require('path');
+
 
 /**
  * @test module:helper
@@ -11,6 +13,7 @@ describe('module:helper', () => {
 	const helperPath = '../../src/helper';
 	let helper;
 	let ctx;
+	let t;
 
 	beforeEach(() => {
 		delete require.cache[require.resolve(helperPath)];
@@ -50,7 +53,7 @@ describe('module:helper', () => {
 		 * @test module:helper~Helper#log
 		 * @test module:helper~Helper#summary
 		 */
-		describe('#init', () => {
+		t = describe('#init', () => {
 			it('sets instance members', () => {
 				assert.deepEqual(helper.getSrc, ctx.book.resolve);
 				assert.deepEqual(helper.log, ctx.log);
@@ -62,7 +65,7 @@ describe('module:helper', () => {
 		/**
 		 * @test module:helper~Helper#renderTemp
 		 */
-		describe('#renderTemp', () => {
+		t = describe('#renderTemp', () => {
 			beforeEach(() => {
 				this.config = {
 					summary: [
@@ -126,7 +129,7 @@ describe('module:helper', () => {
 		/**
 		 * @test module:helper~Helper#getOutput
 		 */
-		describe('#getOutput', () => {
+		t = describe('#getOutput', () => {
 			beforeEach(() => {
 				helper.config.output = 'helper.config.output';
 				this.return = sinon.stub();
@@ -140,7 +143,7 @@ describe('module:helper', () => {
 		/**
 		 * @test module:helper~Helper#pandocCompile
 		 */
-		describe('#pandocCompile', () => {
+		t = describe('#pandocCompile', () => {
 			beforeEach(() => {
 				helper.config = {
 					format: 'markdown',

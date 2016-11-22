@@ -3,31 +3,47 @@
 const tester = require('gitbook-tester');
 const path = require('path');
 const fs = require('fs');
+const sinon = require('sinon');
+const assert = require('assert');
+const shell = require('gulp-shell');
 
 /**
- * @test module:index
+ * @test module:index_hooks
  */
 describe('gitbook-plugin-build', () => {
 
-	const pluginPath = path.join(__dirname, '../..');
+	const root = path.join(__dirname);
+	const gitbook = path.join(__dirname,'../resources/gitbook');
 
-	beforeEach(() => {
-		this.write = sinon.stub(fs,'writeFileSync');
+	before((done) => {
+		process.chdir(gitbook);
+
+		shell.task([[
+			'rm node_modules _book -rf',
+			'npm install'
+		].join(' && ')])(done);
 	});
 
-	afterEach(() => {
-		this.write.restore();
+	after((done) => {
+		shell.task([[
+			'rm node_modules _book -rf',
+		].join(' && ')])((err) => {
+			process.chdir(root);
+			done(err);
+		});
 	});
 
-	it('should compile standalone latex by default', (done) => {
-		tester.builder()
-			.withContent('# Header')
-			.withLocalPlugin(pluginPath)
-			.create()
-			.then(function (result) {
-				expect(result.get('second.html').content).toEqual('<p>Second page content</p>');
-			})
-			.fin(done)
-			.done();
+	it('should not create file on no flag', (done) => {
+		shell.task([[
+			'npm run book-build --debug',
+			'[ ! -f _book/main.tex ]'
+		].join(' && ')])(done);
+	});
+
+	it('should create file on flag', (done) => {
+		shell.task([[
+			'npm run book-plugin-build',
+			'[ -f _book/main.tex ]'
+		].join(' && ')])(done);
 	});
 });

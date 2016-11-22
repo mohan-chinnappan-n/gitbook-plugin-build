@@ -69,7 +69,7 @@ gulp.task('test:e2e', 'Run integration/unit tests.', (cb) => {
 	]).pipe(plumber())
 		.pipe(mocha({
 			reporter: 'spec',
-			timeout: 20000
+			timeout: 100000
 		}))
 		.on('error', (err) => {
 			mochaErr = err;

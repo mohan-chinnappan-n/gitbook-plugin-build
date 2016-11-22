@@ -37,7 +37,7 @@ exports.handlers = {
 		var fileContent;
 		var srcString;
 		var srcArr;
-		var description;
+		var description = '';
 		var errorMsg = [];
 		var testKeys = Object.keys(testDoclets);
 
@@ -71,14 +71,16 @@ exports.handlers = {
 			}
 
 			// Set new description if commentsArr is full
-			description = '\n<b>Tests:</b>\n<ol>\n';
-			testDescription.forEach(function (test) {
-				description += '<li>' + test + '</li>\n';
-			});
-			description += '</ol>';
+			if(testDescription.length > 0){
+				description = '\n<br><b>Tests:</b>\n<ol>\n';
+				testDescription.forEach(function (test) {
+					description += '<li>' + test + '</li>\n';
+				});
+				description += '</ol><br>';
+			}
 
 			try {
-				e.doclet.description = description;
+				e.doclet.description += description;
 			} catch (err) {
 				throw new Error(JSON.stringify(meta, null, 4));
 			}

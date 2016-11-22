@@ -9,12 +9,13 @@ const fs = require('fs');
 const index = require('../../src/index');
 const helper = require('../../src/helper');
 const path = require('path');
-const pac = require('../../package.json');
 
 /**
- * @test module:index
+ * @test module:index_hooks
  */
 describe('index', () => {
+
+	let t;
 
 	before(() => {
 		helper.config = {
@@ -24,9 +25,9 @@ describe('index', () => {
 	});
 
 	/**
-	 * @test module:index~hooks.init
+	 * @test module:index_hooks~init
 	 */
-	describe('~hooks.init', () => {
+	t = describe('hooks~init', () => {
 		beforeEach(() => {
 			this.init = sinon.stub(helper, 'init');
 			this.article = sinon.stub();
@@ -60,9 +61,9 @@ describe('index', () => {
 	});
 
 	/**
-	 * @test module:index~hooks.finish
+	 * @test module:index_hooks~finish
 	 */
-	describe('~hooks.finish', () => {
+	t = describe('hooks~finish', () => {
 
 		beforeEach(() => {
 			this.fullOutputPath = 'some/dir/and/helper/getOutput';
@@ -121,9 +122,9 @@ describe('index', () => {
 	});
 
 	/**
-	 * @test module:index~hooks.page
+	 * @test module:index_hooks~page
 	 */
-	describe('~hooks.page', () => {
+	t = describe('hooks~page', () => {
 		beforeEach(() => {
 			helper.summary = [{
 				path: 'summary.path0'

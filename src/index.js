@@ -11,14 +11,14 @@ const helper = require('./helper');
 
 /**
  * Module for defining gitbook plugin.
- *
- * @module index
+ * @module index_hooks
  */
 
 module.exports = argv['plugin-build'] !== true ? {} : {
 	hooks: {
 		/**
 		 * Gitbook hook on initilization.
+		 * @member module:index_hooks~init
 		 */
 		init: function () { // eslint-disable-line object-shorthand
 			// Inits helper
@@ -32,6 +32,7 @@ module.exports = argv['plugin-build'] !== true ? {} : {
 
 		/**
 		 * Gitbook hook on finishing.
+		 * @member module:index_hooks~finish
 		 * @returns {Promise}
 		 */
 		finish: function () { // eslint-disable-line object-shorthand
@@ -49,15 +50,16 @@ module.exports = argv['plugin-build'] !== true ? {} : {
 				.then((compiledContent) => {
 					// Write file to output dir.
 					fs.writeFileSync(outputPath, compiledContent);
-				}).then(() => {
+
 					// Log action.
-					self.log.info('plugin-build(output):', helper.config.output);
+					self.log.info.ln('plugin-build(output):', helper.config.output);
 				});
 		},
 
 		/**
 		 * Gitbook hook for page. Function will be executed
 		 * after markdown is processed with other plugins.
+		 * @member module:index_hooks~page
 		 * @param page
 		 * @returns {page} The same as page parameter.
 		 */
@@ -73,5 +75,4 @@ module.exports = argv['plugin-build'] !== true ? {} : {
 			return page;
 		}
 	}
-}
-;
+};

@@ -348,46 +348,41 @@ others know what you're working on.</p>
 <p>If your issue appears to be a bug, and hasn't been reported, open a new issue. Help to maximize
 the effort on fixing issues and adding new features, by not reporting duplicate issues.
 Providing the following information will increase the chances of your issue being dealt with
-quickly:</p>
-<ul>
-<li><strong>Overview of the Issue</strong> - if an error is being thrown a non-minified stack trace helps</li>
-<li><strong>Debug log file</strong> - Use <code>gitbook build --debug</code> to create debug log file.</li>
-<li><strong>Motivation for or Use Case</strong> - explain why this is a bug for you.</li>
-<li><strong>Related Issues</strong> - has a similar issue been reported before?</li>
-<li><strong>Suggest a Fix</strong> - if you can't fix the bug yourself, perhaps you can point to what might be
-  causing the problem (line of code or commit)</li>
-</ul>
+quickly.</p>
 <p><strong>If you get help, help others. Good karma rulez!</strong></p>
 <h2 id="submitting-a-pull-request">Submitting a Pull Request<a class="headerlink" href="#submitting-a-pull-request" title="Permanent link">#</a></h2>
 <p>Before you submit your pull request consider the following guidelines:</p>
 <ul>
-<li>Search <a href="https://github.com/urosjarc/gitbook-plugin-build/pulls">GitHub</a> for an open or closed Pull Request
+<li>Search <a href="https://github.com/urosjarc/gitbook-plugin-build">GitHub Repository</a> for an open or closed Pull Request
   that relates to your submission. You don't want to duplicate effort.</li>
-<li>
-<p>Make your changes in a new git branch:</p>
-<p><code>git checkout -b my-fix-branch master</code></p>
-</li>
-<li>
-<p>Create your patch, <strong>including appropriate test cases</strong>.</p>
-</li>
-<li>
-<p>Run test suite. and ensure that all tests pass.</p>
-<p><code>npm test</code></p>
-</li>
-<li>
-<p>Commit your changes using a descriptive commit message.</p>
-</li>
-<li>
-<p>Push your branch to GitHub:</p>
-<p><code>git push origin my-fix-branch</code></p>
-</li>
+<li>Make your changes in a new git branch:</li>
 </ul>
+<div class="code"><pre><span></span>git checkout -b my-fix-branch master
+</pre></div>
+
+
+<ul>
+<li>Create your patch, <strong>including appropriate test cases</strong>.</li>
+<li>Run test suite. and ensure that all tests pass.</li>
+</ul>
+<div class="code"><pre><span></span>npm <span class="nb">test</span>
+</pre></div>
+
+
+<ul>
+<li>Commit your changes using a descriptive commit message.</li>
+<li>Push your branch to GitHub:</li>
+</ul>
+<div class="code"><pre><span></span>git push origin my-fix-branch
+</pre></div>
+
+
 <p>In GitHub, send a pull request to <code>gitbook-plugin-build:master</code>.</p>
 <p>That's it! Thank you for your contribution!</p>
 <h2 id="coding-rules">Coding Rules<a class="headerlink" href="#coding-rules" title="Permanent link">#</a></h2>
 <p>To ensure consistency throughout the source code, keep these rules in mind as you are working:</p>
 <ul>
-<li>All features or bug fixes <strong>must be tested</strong> by one or more [specs][unit-testing].</li>
+<li>All features or bug fixes <strong>must be tested</strong> by one or more tests.</li>
 <li>All public API methods <strong>must be documented</strong> with jsdoc3.</li>
 <li>Use our set of linting rules.</li>
 </ul>

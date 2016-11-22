@@ -313,22 +313,8 @@
 <h2 id="plugin-setup">Plugin setup<a class="headerlink" href="#plugin-setup" title="Permanent link">#</a></h2>
 <ul>
 <li>Add <strong>GPP</strong> plugin to <code>(book.json).plugins</code> array, see gitbook <a href="https://toolchain.gitbook.com/plugins">info about plugins</a>.</li>
-<li>Add <strong>GPP</strong> configuration to <code>(book.json).pluginsConfig.build</code> object, or leave it empty to use default configuration...</li>
-</ul>
-<div class="code"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;bin&quot;</span><span class="p">:</span> <span class="s2">&quot;pandoc&quot;</span><span class="p">,</span>                  <span class="err">#</span> <span class="err">Pandoc</span> <span class="err">binaries.</span>
-  <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[],</span>                       <span class="err">#</span> <span class="err">Arguments</span> <span class="err">passed</span> <span class="err">to</span> <span class="err">pandoc</span> <span class="err">on</span> <span class="err">build.</span>
-  <span class="nt">&quot;opts&quot;</span><span class="p">:</span> <span class="p">{},</span>                       <span class="err">#</span> <span class="err">Options</span> <span class="err">passed</span> <span class="err">to</span> <span class="err">pandoc</span> <span class="err">on</span> <span class="err">build.</span>
-  <span class="nt">&quot;template&quot;</span><span class="p">:</span> <span class="s2">&quot;_layouts/main.tex&quot;</span><span class="p">,</span>  <span class="err">#</span> <span class="err">Build</span> <span class="err">template.</span>
-  <span class="nt">&quot;output&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;build/main.tex&quot;</span><span class="p">,</span>       <span class="err">#</span> <span class="err">Output</span> <span class="err">path</span> <span class="err">for</span> <span class="err">build.</span>
-    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;latex&quot;</span>               <span class="err">#</span> <span class="err">Pandoc</span> <span class="err">output</span> <span class="err">format.</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<ul>
+<li>Add <strong>GPP</strong> configuration to <code>(book.json).pluginsConfig.build</code> object, or leave it empty to use default configuration.</li>
+<li>Default configuration is located <a href="https://plugins.gitbook.com/plugin/build">here at the bottom</a>.</li>
 <li>Install gitbook plugins by running <code>gitbook install</code>.</li>
 <li>To se which formats pandoc provides check <code>man pandoc</code>.</li>
 </ul>

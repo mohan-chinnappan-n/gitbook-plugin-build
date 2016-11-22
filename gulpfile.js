@@ -39,14 +39,14 @@ gulp.task('test:spec', 'Run integration/unit tests.', ['test:pre'], (cb) => {
 		.pipe(mocha({
 			reporter: 'spec'
 		}))
-		.on('error', function (err) {
+		.on('error', (err) => {
 			mochaErr = err;
 		})
 		.pipe(istanbul.writeReports({
 			dir: './build/coverage',
 			reportOpts: {dir: './build/coverage'}
 		}))
-		.on('end', function () {
+		.on('end', () => {
 			cb(mochaErr);
 		});
 });
@@ -95,13 +95,12 @@ gulp.task('test:docs', 'Test project documentations.', ['inchjs'], () => {
 	const docs = require('./docs.json'); // eslint-disable-line import/no-unresolved
 	const errors = [];
 	docs.objects.forEach((object) => {
-		if (object.undocumented === true) {
+		if (object.undocumented === true && /module:/.test(object.memberof)) {
 			errors.push(` > ${object.longname} in ${path.join(object.meta.path, object.meta.filename)}`);
 		}
 	});
 	if (errors.length > 0) {
-		console.error(`Objects undocumented...\n${errors.join('\n')}\n`); // Todo: Document all elements!
-		// throw new Error(`Objects undocumented...\n${errors.join('\n')}\n`);
+		throw new Error(`Objects undocumented...\n${errors.join('\n')}\n`);
 	} else {
 		console.log('\n > Documentations tests all pass!\n');
 	}

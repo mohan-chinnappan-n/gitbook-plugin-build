@@ -1,9 +1,12 @@
 'use strict';
 
-const fs = require('fs');
+/**
+ * @ignore
+ */
 const pdc = require('pdc');
 const ejs = require('ejs');
 const merge = require('merge');
+const fs = require('fs');
 const pac = require('../package.json');
 
 /**
@@ -13,27 +16,35 @@ const pac = require('../package.json');
  */
 
 /**
- * Callback for returning string.
- *
- * @callback returnString
- * @param content {String} Returned content.
- */
-
-/**
- * Constructor. Wraps book instance.
- *
- * @class Helper class which holds most hard logic,
+ * Holds most hard logic,
  * so that plugins methods can be
- * as clean as possible.
+ * as clean as possible. Raps book instance.
+ * @class Helper Main module class.
  */
 class Helper {
 
 	/**
 	 * Helper constructor.
+	 * @constructs Helper
 	 */
 	constructor() {
+		/**
+		 * Get absolute src path.
+		 * @param path
+		 * @member Helper#getSrc
+		 */
 		this.getSrc = null;
+
+		/**
+		 * Main plugin configuration.
+		 * @member Helper#config
+		 */
 		this.config = null;
+
+		/**
+		 * Gitbook logger.
+		 * @member Helper#log
+		 */
 		this.log = null;
 	}
 
@@ -81,8 +92,8 @@ class Helper {
 
 	/**
 	 * Compile html string to output format.
-	 * @param html {String} Html string.
-	 * @param {returnString} Callback for compiled content.
+	 * @param html {String} Html string format.
+	 * @param cb {strCallback} Callback for compiled content.
 	 */
 	pandocCompile(html, cb) {
 		const args = this.config.args

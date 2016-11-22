@@ -1,17 +1,28 @@
 'use strict';
 
-const path = require('path');
-const argv = require('yargs').argv;
+/**
+ * @ignore
+ */
 const mkdirp = require('mkdirp');
 const fs = require('fs');
-
+const path = require('path');
+const argv = require('yargs').argv;
 const helper = require('./helper');
 const pac = require('../package.json');
 
 const summary = [];
 
+/**
+ * Module for defining gitbook plugin.
+ *
+ * @module index
+ */
+
 module.exports = argv['plugin-build'] !== true ? {} : {
 	hooks: {
+		/**
+		 * Gitbook hook on initilization.
+		 */
 		init: function () { // eslint-disable-line object-shorthand
 			// Init helper
 			helper.init(this);
@@ -21,6 +32,11 @@ module.exports = argv['plugin-build'] !== true ? {} : {
 				summary.push(article);
 			});
 		},
+
+		/**
+		 * Gitbook hook on finishing.
+		 * @returns {Promise}
+		 */
 		finish: function () { // eslint-disable-line object-shorthand
 			const self = this;
 			const outputPath = helper.getOutput();
@@ -47,6 +63,13 @@ module.exports = argv['plugin-build'] !== true ? {} : {
 				});
 			});
 		},
+
+		/**
+		 * Gitbook hook for page. Function will be executed
+		 * after markdown is processed with other plugins.
+		 * @param page
+		 * @returns {page} The same as page parameter.
+		 */
 		page: function (page) { // eslint-disable-line object-shorthand
 			// Fill summary with compiled page content
 			summary.forEach((article, i, array) => {

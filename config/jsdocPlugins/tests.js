@@ -38,7 +38,7 @@ exports.handlers = {
 		var srcString;
 		var srcArr;
 		var description;
-		var errorMsg = ['Test missing on:'];
+		var errorMsg = [];
 		var testKeys = Object.keys(testDoclets);
 
 		// Add descriptions
@@ -77,7 +77,11 @@ exports.handlers = {
 			});
 			description += '</ol>';
 
-			e.doclet.description = description;
+			try {
+				e.doclet.description = description;
+			} catch (err) {
+				throw new Error(JSON.stringify(meta, null, 4));
+			}
 		}
 
 		// Test coverage
@@ -88,7 +92,7 @@ exports.handlers = {
 		});
 
 		if (errorMsg.length > 0) {
-			logger.warn(errorMsg.join('\n')); // Todo: rename this to error.
+			logger.error('Test missing on:\n' + errorMsg.join('\n'));
 		}
 	}
 };

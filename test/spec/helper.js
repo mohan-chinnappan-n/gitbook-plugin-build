@@ -51,11 +51,13 @@ describe('module:helper', () => {
 		 * @test module:helper~Helper#getSrc
 		 * @test module:helper~Helper#config
 		 * @test module:helper~Helper#log
+		 * @test module:helper~Helper#summary
 		 */
 		describe('#init', () => {
 			it('sets instance members', () => {
 				assert.deepEqual(helper.getSrc, ctx.book.resolve);
 				assert.deepEqual(helper.log, ctx.log);
+				assert.deepEqual(helper.summary, []);
 				assert.deepEqual(helper.config, ctx.options.pluginsConfig.build);
 			});
 		});

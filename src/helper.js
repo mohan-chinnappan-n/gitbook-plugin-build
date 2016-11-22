@@ -44,6 +44,12 @@ class Helper {
 		 * @member module:helper~Helper#log
 		 */
 		this.log = null;
+
+		/**
+		 * Gitbook summary.
+		 * @member module:helper~Helper#summary
+		 */
+		this.summary = [];
 	}
 
 	/**
@@ -73,6 +79,7 @@ class Helper {
 
 		try {
 			fileStat = fs.statSync(this.config.template);
+
 			isTemp.file = fileStat.isFile();
 			isTemp.dir = fileStat.isDirectory();
 		} catch (err) {
@@ -83,6 +90,7 @@ class Helper {
 		if (isTemp.file && !isTemp.dir) {
 			// If template exist render with ejs.
 			const rawContent = fs.readFileSync(this.getSrc(this.config.template), 'utf-8');
+
 			try{
 				content = ejs.render( rawContent, config );
 			} catch (err) {

@@ -167,13 +167,13 @@ describe('module:helper', () => {
 			);
 
 			it('filter config args and sort it', () => {
-				helper.config.args = ['--standalone', '--standalone', '--verbose'];
+				helper.config.args = ['--standalone', '--standalone'];
 
 				return helper.pandocCompile('<p>hello world</p>')
 					.then(() => {
 						assert.deepEqual(helper.log.debug.ln.getCalls()[0].args, [
 							'plugin-build(compile):', JSON.stringify({
-								args: ['--verbose', '--standalone'].sort(),
+								args: ['--standalone'].sort(),
 								config: helper.config
 							}, null, 2)
 						]);

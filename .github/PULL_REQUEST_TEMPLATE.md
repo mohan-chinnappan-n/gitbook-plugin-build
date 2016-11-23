@@ -2,7 +2,7 @@
 - [ ] The commit message follows [our guidelines](https://github.com/urosjarc/gitbook-plugin-build/blob/master/.github/CONTRIBUTING.md).
 - [ ] Tests for the changes have been added (for bug fixes / features)
 - [ ] Docs have been added / updated (for bug fixes / features)
-
+- [ ] `npm test` passed with success.
 
 **What kind of change does this PR introduce?** (check one with "x")
 - [ ] Bugfix

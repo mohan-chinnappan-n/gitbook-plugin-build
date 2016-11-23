@@ -1,6 +1,6 @@
 'use strict';
 
-process.argv = process.argv.concat(['--plugin-build']);
+process.argv = process.argv.concat(['--plugin-build=latex']);
 
 const assert = require('assert');
 const sinon = require('sinon');
@@ -11,31 +11,31 @@ const helper = require('../../src/helper');
 const path = require('path');
 
 /**
- * @test module:index_hooks
+ * @test module:index
  */
 describe('index', () => {
-
-	let t;
+	let t; // eslint-disable-line
 
 	before(() => {
 		helper.config = {
 			output: 'helper/config/output'
-		}
-
+		};
 	});
 
 	/**
-	 * @test module:index_hooks~init
+	 * @test module:index~hooks.init
 	 */
 	t = describe('hooks~init', () => {
 		beforeEach(() => {
 			this.init = sinon.stub(helper, 'init');
 			this.article = sinon.stub();
 
-			index.hooks.log = {info: sinon.stub()};
+			index.hooks.log = {info: {ln: sinon.stub()}};
 			index.hooks.book = {
 				summary: {
-					walk: (cb) => cb(this.article)
+					walk: (cb) => {
+						cb(this.article);
+					}
 				}
 			};
 
@@ -61,10 +61,9 @@ describe('index', () => {
 	});
 
 	/**
-	 * @test module:index_hooks~finish
+	 * @test module:index~hooks.finish
 	 */
 	t = describe('hooks~finish', () => {
-
 		beforeEach(() => {
 			this.fullOutputPath = 'some/dir/and/helper/getOutput';
 			helper.summary = ['summary'];
@@ -75,10 +74,8 @@ describe('index', () => {
 				.returns(Promise.resolve('compiledContent'));
 			this.getOutput = sinon.stub(helper, 'getOutput')
 				.returns(this.fullOutputPath);
-			this.renderTemp = sinon.stub(helper, 'renderTemp', (obj) => {
-				return JSON.stringify(obj);
-			});
-			index.hooks.log = {info: sinon.stub()};
+			this.renderTemp = sinon.stub(helper, 'renderTemp', obj => JSON.stringify(obj));
+			index.hooks.log = {info: {ln: sinon.stub()}};
 		});
 
 		afterEach(() => {
@@ -113,16 +110,16 @@ describe('index', () => {
 				});
 		});
 
-		it('logs at the end', () => {
-			return index.hooks.finish()
+		it('logs at the end', () =>
+			index.hooks.finish()
 				.then(() => {
-					assert(index.hooks.log.info.withArgs('plugin-build(output):', helper.config.output).calledOnce);
-				});
-		});
+					assert(index.hooks.log.info.ln.withArgs('plugin-build(output):', helper.config.output).calledOnce);
+				})
+		);
 	});
 
 	/**
-	 * @test module:index_hooks~page
+	 * @test module:index~hooks.page
 	 */
 	t = describe('hooks~page', () => {
 		beforeEach(() => {
@@ -159,16 +156,16 @@ describe('index', () => {
 		it('should fill helper summary with content', () => {
 			assert.deepEqual(helper.summary, [
 				{
-					"content": "content.path0",
-					"path": "summary.path0"
+					content: 'content.path0',
+					path: 'summary.path0'
 				},
 				{
-					"content": "content.path1",
-					"path": "summary.path1"
+					content: 'content.path1',
+					path: 'summary.path1'
 				},
 				{
-					"content": "content.path2",
-					"path": "summary.path2"
+					content: 'content.path2',
+					path: 'summary.path2'
 				}
 			]);
 		});

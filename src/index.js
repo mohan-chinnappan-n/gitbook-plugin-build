@@ -13,14 +13,17 @@ const pluginBuildFlag = argv['plugin-build'];
 
 /**
  * Module for defining gitbook plugin.
- * @module index_hooks
+ * @module index
  */
 
 module.exports = !pluginBuildFlag ? {} : {
+	/**
+	 * @member module:index~hooks
+	 */
 	hooks: {
 		/**
 		 * Gitbook hook on initilization.
-		 * @member module:index_hooks~init
+		 * @memberOf module:index~hooks
 		 */
 		init: function () { // eslint-disable-line object-shorthand
 			// Inits helper
@@ -39,7 +42,7 @@ module.exports = !pluginBuildFlag ? {} : {
 
 		/**
 		 * Gitbook hook on finishing.
-		 * @member module:index_hooks~finish
+		 * @memberOf module:index~hooks
 		 * @returns {Promise}
 		 */
 		finish: function () { // eslint-disable-line object-shorthand
@@ -66,7 +69,7 @@ module.exports = !pluginBuildFlag ? {} : {
 		/**
 		 * Gitbook hook for page. Function will be executed
 		 * after markdown is processed with other plugins.
-		 * @member module:index_hooks~page
+		 * @memberOf module:index~hooks
 		 * @param page
 		 * @returns {page} The same as page parameter.
 		 */

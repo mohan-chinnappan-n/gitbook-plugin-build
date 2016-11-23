@@ -1,5 +1,6 @@
 node_modules
 build
+_book
 .idea
 docs.json
 npm-debug.log

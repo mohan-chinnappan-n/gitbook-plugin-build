@@ -1,8 +1,8 @@
 /*
-    eslint-disable no-var, import/no-extraneous-dependencies,
-    object-shorthand, func-names, vars-on-top,
-    prefer-arrow-callback, prefer-template
-*/
+ eslint-disable no-var, import/no-extraneous-dependencies,
+ object-shorthand, func-names, vars-on-top,
+ prefer-arrow-callback, prefer-template
+ */
 
 'use strict';
 

@@ -69,10 +69,9 @@ class Helper {
 	 * @param config {Object} Should be in form `{summary: [{content: <String}]}`.
 	 */
 	renderTemp(config) {
-		let error = false;
 		let content;
 		let fileStat;
-		let isTemp = {
+		const isTemp = {
 			file: false,
 			dir: false
 		};
@@ -91,8 +90,8 @@ class Helper {
 			// If template exist render with ejs.
 			const rawContent = fs.readFileSync(this.getSrc(this.config.template), 'utf-8');
 
-			try{
-				content = ejs.render( rawContent, config );
+			try {
+				content = ejs.render(rawContent, config);
 			} catch (err) {
 				// If template syntax is corrupted throw error.
 				throw new Error(`Template error: ${this.config.template}\n${err.message}`);
@@ -135,9 +134,9 @@ class Helper {
 		this.log.debug.ln('plugin-build(compile):', JSON.stringify({
 			args,
 			config: this.config
-		},null,2));
+		}, null, 2));
 
-		return new Promise((resolve,reject) => {
+		return new Promise((resolve, reject) => {
 			// Compile html string.
 			pdc(html,
 				'html',

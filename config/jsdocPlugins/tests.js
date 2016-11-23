@@ -71,7 +71,7 @@ exports.handlers = {
 			}
 
 			// Set new description if commentsArr is full
-			if(testDescription.length > 0){
+			if (testDescription.length > 0) {
 				description = '\n<br><b>Tests:</b>\n<ol>\n';
 				testDescription.forEach(function (test) {
 					description += '<li>' + test + '</li>\n';

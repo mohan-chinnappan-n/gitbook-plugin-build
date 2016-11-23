@@ -1,19 +1,14 @@
 'use strict';
 
-const tester = require('gitbook-tester');
 const path = require('path');
-const fs = require('fs');
-const sinon = require('sinon');
-const assert = require('assert');
 const shell = require('gulp-shell');
 
 /**
  * @test module:index_hooks
  */
 describe('gitbook-plugin-build', () => {
-
 	const root = path.join(__dirname);
-	const gitbook = path.join(__dirname,'../resources/gitbook');
+	const gitbook = path.join(__dirname, '../resources/gitbook');
 
 	before((done) => {
 		process.chdir(gitbook);
@@ -26,7 +21,7 @@ describe('gitbook-plugin-build', () => {
 
 	after((done) => {
 		shell.task([[
-			'rm node_modules _book -rf',
+			'rm node_modules _book -rf'
 		].join(' && ')])((err) => {
 			process.chdir(root);
 			done(err);

@@ -13,7 +13,7 @@ describe('module:helper', () => {
 	const helperPath = '../../src/helper';
 	let helper;
 	let ctx;
-	let t;
+	let t; // eslint-disable-line
 
 	beforeEach(() => {
 		delete require.cache[require.resolve(helperPath)];
@@ -23,10 +23,10 @@ describe('module:helper', () => {
 				resolve: sinon.stub()
 			},
 			log: {
-				warn: sinon.stub(),
-				error: sinon.stub(),
-				info: sinon.stub(),
-				debug: sinon.stub()
+				warn: {ln: sinon.stub()},
+				error: {ln: sinon.stub()},
+				info: {ln: sinon.stub()},
+				debug: {ln: sinon.stub()}
 			},
 			options: {
 				pluginsConfig: {
@@ -99,8 +99,7 @@ describe('module:helper', () => {
 					});
 					return content;
 				})());
-				assert(helper.log.warn.withArgs('plugin-build:', sinon.match.string).calledOnce);
-				assert(/ENOENT: no such file or directory.*NOT_EXIST/.test(helper.log.warn.getCalls()[0].args[1]));
+				assert(helper.log.warn.ln.withArgs('plugin-build: no template found').calledOnce);
 			});
 
 			it('throw error if template path is folder', (done) => {
@@ -120,7 +119,9 @@ describe('module:helper', () => {
 					helper.renderTemp(this.config);
 					done('Should not pass');
 				} catch (err) {
-					assert(/Template error: .*main_err.*NOT_EXIST is not defined.*/.test(err.message.split('\n').join(' ')));
+					assert(/Template error: .*main_err.*NOT_EXIST is not defined.*/
+						.test(err.message.split('\n').join(' '))
+					);
 					done();
 				}
 			});
@@ -152,30 +153,29 @@ describe('module:helper', () => {
 				};
 			});
 
-			it('returns compiled html from callback and logs', () => {
-				return helper.pandocCompile('<p>hello world</p>')
+			it('returns compiled html from callback and logs', () =>
+				helper.pandocCompile('<p>hello world</p>')
 					.then((result) => {
 						assert.equal(result, 'hello world\n');
-						assert.deepEqual(helper.log.debug.getCalls()[0].args, [
-							'plugin-build(compile):', {
+						assert.deepEqual(helper.log.debug.ln.getCalls()[0].args, [
+							'plugin-build(compile):', JSON.stringify({
 								args: ['--standalone'].sort(),
 								config: helper.config
-							}
+							}, null, 2)
 						]);
-					});
-
-			});
+					})
+			);
 
 			it('filter config args and sort it', () => {
 				helper.config.args = ['--standalone', '--standalone', '--verbose'];
 
 				return helper.pandocCompile('<p>hello world</p>')
 					.then(() => {
-						assert.deepEqual(helper.log.debug.getCalls()[0].args, [
-							'plugin-build(compile):', {
+						assert.deepEqual(helper.log.debug.ln.getCalls()[0].args, [
+							'plugin-build(compile):', JSON.stringify({
 								args: ['--verbose', '--standalone'].sort(),
 								config: helper.config
-							}
+							}, null, 2)
 						]);
 					});
 			});

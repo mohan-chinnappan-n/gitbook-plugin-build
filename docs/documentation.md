@@ -23,7 +23,7 @@
 [coverage-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build
 [codestyle]: https://img.shields.io/codacy/grade/27e38bb72bdc4476b2e87e9926df0485.svg
 [codestyle-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build
-[dep]: https://david-dm.org/urosjarc/gitbook-plugin-build.svg
+[dep]: https://img.shields.io/david/urosjarc/gitbook-plugin-build.svg
 [dep-url]: https://david-dm.org/urosjarc/gitbook-plugin-build
 [docs]: http://inch-ci.org/github/urosjarc/gitbook-plugin-build.svg?branch=master
 [docs-url]: http://inch-ci.org/github/urosjarc/gitbook-plugin-build

@@ -65,8 +65,8 @@ class Helper {
 
 	/**
 	 * Get rendered template content.
-	 * @returns {String} Rendered content.
 	 * @param config {Object} Should be in form `{summary: [{content: <String}]}`.
+	 * @returns {String} Rendered content.
 	 */
 	renderTemp(config) {
 		let content;
@@ -121,7 +121,8 @@ class Helper {
 
 	/**
 	 * Compile html string to output format.
-	 * @param html {String} Html string format.
+	 * @param html
+	 * @returns {Promise}
 	 */
 	pandocCompile(html) {
 		// Add standalone flag to pandoc arguments.

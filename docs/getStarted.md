@@ -21,8 +21,8 @@ Add `--plugin-build` flag to you gitbook command to start **GPB** build.
 **GPB** will create output file base on [gitbook summary file](https://toolchain.gitbook.com/pages.html)...
 
 ```shell
-gitbook serve --plugin-build
-gitbook build --plugin-build
+gitbook serve --plugin-build=latex // Ovveride config.format
+gitbook build --plugin-build       // Use default config.format
 ```
 
 ## Template

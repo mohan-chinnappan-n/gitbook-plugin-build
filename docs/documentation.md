@@ -1,4 +1,1 @@
-# gitbook-plugin-build
- 
-This is official project documentation for
-`gitbook-plugin-build` project.
+# DO NOT DELETE OR CHANGE THIS FILE!

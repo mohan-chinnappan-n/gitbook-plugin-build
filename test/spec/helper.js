@@ -106,11 +106,7 @@ describe('module:helper', () => {
 				helper.config.template += 'folder';
 				try {
 					helper.renderTemp(this.config);
-					if (process.env.CI) {
-						done();
-					} else {
-						done('Should not pass');
-					}
+					done('Should not pass');
 				} catch (err) {
 					assert(/Template path is not file: .*folder/.test(err.message));
 					done();

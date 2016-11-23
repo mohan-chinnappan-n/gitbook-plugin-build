@@ -1,4 +1,4 @@
-/* eslint-disable global-require, import/no-dynamic-require */
+/* eslint-disable global-require, import/no-dynamic-require, no-console */
 
 'use strict';
 
@@ -37,12 +37,15 @@ gulp.task('test:spec', 'Run integration/unit tests.', ['test:pre'], (cb) => {
 		'test/spec/**/*.js'
 	]).pipe(plumber())
 		.pipe(mocha({
-			reporter: 'spec',
-			timeout: 20000
+			reporter: 'spec'
 		}))
 		.on('error', (err) => {
 			mochaErr = err;
 		})
+		.pipe(istanbul.writeReports({
+			dir: './build/coverage',
+			reportOpts: {dir: './build/coverage'}
+		}))
 		.on('end', () => {
 			cb(mochaErr);
 		});
@@ -66,7 +69,7 @@ gulp.task('test:e2e', 'Run integration/unit tests.', (cb) => {
 	]).pipe(plumber())
 		.pipe(mocha({
 			reporter: 'spec',
-			timeout: 20000
+			timeout: 100000
 		}))
 		.on('error', (err) => {
 			mochaErr = err;
@@ -92,13 +95,12 @@ gulp.task('test:docs', 'Test project documentations.', ['inchjs'], () => {
 	const docs = require('./docs.json'); // eslint-disable-line import/no-unresolved
 	const errors = [];
 	docs.objects.forEach((object) => {
-		if (object.undocumented === true) {
+		if (object.undocumented === true && /module:/.test(object.memberof)) {
 			errors.push(` > ${object.longname} in ${path.join(object.meta.path, object.meta.filename)}`);
 		}
 	});
 	if (errors.length > 0) {
-		console.error(`Objects undocumented...\n${errors.join('\n')}\n`); // Todo: Document all elements!
-		// throw new Error(`Objects undocumented...\n${errors.join('\n')}\n`);
+		throw new Error(`Objects undocumented...\n${errors.join('\n')}\n`);
 	} else {
 		console.log('\n > Documentations tests all pass!\n');
 	}

@@ -1,60 +1,87 @@
 'use strict';
 
-const path = require('path');
-const argv = require('yargs').argv;
+/**
+ * @ignore
+ */
 const mkdirp = require('mkdirp');
 const fs = require('fs');
-
+const path = require('path');
+const argv = require('yargs').argv;
 const helper = require('./helper');
-const pac = require('../package.json');
 
-const summary = [];
+const pluginBuildFlag = argv['plugin-build'];
 
-module.exports = argv['plugin-build'] !== true ? {} : {
+/**
+ * Module for defining gitbook plugin.
+ * @module index
+ */
+
+module.exports = !pluginBuildFlag ? {} : {
+	/**
+	 * @member module:index~hooks
+	 */
 	hooks: {
+		/**
+		 * Gitbook hook on initilization.
+		 * @memberOf module:index~hooks
+		 */
 		init: function () { // eslint-disable-line object-shorthand
-			// Init helper
+			// Inits helper
 			helper.init(this);
+
+			// Check cli args for output format, and override on existance of string.
+			if (typeof pluginBuildFlag === 'string' || pluginBuildFlag instanceof String) {
+				helper.config.format = pluginBuildFlag;
+			}
 
 			// Fill summary array
 			this.book.summary.walk((article) => {
-				summary.push(article);
+				helper.summary.push(article);
 			});
 		},
+
+		/**
+		 * Gitbook hook on finishing.
+		 * @memberOf module:index~hooks
+		 * @returns {Promise}
+		 */
 		finish: function () { // eslint-disable-line object-shorthand
 			const self = this;
 			const outputPath = helper.getOutput();
 
-			return new Promise((resolve) => {
-				// Create output dir
-				mkdirp(path.parse(outputPath).dir, (mkdirpErr) => {
-					if (mkdirpErr) return self.log.error(mkdirpErr.message);
+			// Render template.
+			const rawContent = helper.renderTemp({summary: helper.summary});
 
-					// Compile rendered main file
-					helper.pandocCompile(helper.renderTemp({summary}), (pandocErr, content) => {
-						if (pandocErr) return self.log.error(pandocErr.message);
+			// Create output dir.
+			mkdirp.sync(path.parse(outputPath).dir);
 
-						// Write file to outputpath
-						fs.writeFile(outputPath, content, (fsErr) => {
-							if (fsErr) return self.log.error(fsErr.message);
+			// Compile rendered main file
+			return helper.pandocCompile(rawContent)
+				.then((compiledContent) => {
+					// Write file to output dir.
+					fs.writeFileSync(outputPath, compiledContent);
 
-							// Log action
-							this.log.info(`plugin-build(${pac.version}) output:`, helper.config.output.path);
-
-							resolve();
-						});
-					});
+					// Log action.
+					self.log.info.ln('plugin-build(output):', helper.config.output);
 				});
-			});
 		},
+
+		/**
+		 * Gitbook hook for page. Function will be executed
+		 * after markdown is processed with other plugins.
+		 * @memberOf module:index~hooks
+		 * @param page
+		 * @returns {page} The same as page parameter.
+		 */
 		page: function (page) { // eslint-disable-line object-shorthand
 			// Fill summary with compiled page content
-			summary.forEach((article, i, array) => {
+			helper.summary.forEach((article, i, array) => {
 				if (article.path === page.path) {
 					array[i].content = page.content;
 				}
 			});
 
+			// Returns unchanged page.
 			return page;
 		}
 	}

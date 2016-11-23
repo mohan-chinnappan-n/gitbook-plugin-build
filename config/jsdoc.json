@@ -1,6 +1,6 @@
 {
 	"opts": {
-		"destination": "./build/docs/changelog.md",
+		"destination": "./build/docs/documentation",
 		"encoding": "utf8",
 		"recurse": true
 	},

@@ -9,12 +9,14 @@ const path = require('path');
 const argv = require('yargs').argv;
 const helper = require('./helper');
 
+const pluginBuildFlag = argv['plugin-build'];
+
 /**
  * Module for defining gitbook plugin.
  * @module index_hooks
  */
 
-module.exports = argv['plugin-build'] !== true ? {} : {
+module.exports = !pluginBuildFlag ? {} : {
 	hooks: {
 		/**
 		 * Gitbook hook on initilization.
@@ -23,6 +25,11 @@ module.exports = argv['plugin-build'] !== true ? {} : {
 		init: function () { // eslint-disable-line object-shorthand
 			// Inits helper
 			helper.init(this);
+
+			// Check cli args for output format, and override on existance of string.
+			if (typeof pluginBuildFlag === 'string' || pluginBuildFlag instanceof String) {
+				helper.config.format = pluginBuildFlag;
+			}
 
 			// Fill summary array
 			this.book.summary.walk((article) => {

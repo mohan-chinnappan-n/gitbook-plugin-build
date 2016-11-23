@@ -1,9 +1,9 @@
-I would love for you to contribute to our source code and to make **GPP** even better than it is
+I would love for you to contribute to our source code and to make **GPB** even better than it is
 today! Here are the guidelines for you to follow...
 
 ## Got a Question?
 
-If you have questions about how to use **GPP**, please create new issue
+If you have questions about how to use **GPB**, please create new issue
 in which you point out which section of documentation is lacking with information.
 
 ## Found an Issue?

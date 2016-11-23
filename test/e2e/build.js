@@ -35,15 +35,24 @@ describe('gitbook-plugin-build', () => {
 
 	it('should not create file on no flag', (done) => {
 		shell.task([[
-			'npm run book-build --debug',
+			'npm run book-build',
 			'[ ! -f _book/main.tex ]'
 		].join(' && ')])(done);
 	});
 
 	it('should create file on flag', (done) => {
 		shell.task([[
-			'npm run book-plugin-build',
-			'[ -f _book/main.tex ]'
+			'npm run book-plugin',
+			'[ -f _book/main.tex ]',
+			'grep -q "section{Introduction}" _book/main.tex'
+		].join(' && ')])(done);
+	});
+
+	it('should be possible to change format in cmd', (done) => {
+		shell.task([[
+			'npm run book-format',
+			'[ -f _book/main.tex ]',
+			'grep -q "Introduction</h1>" _book/main.tex'
 		].join(' && ')])(done);
 	});
 });

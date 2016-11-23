@@ -13,3 +13,7 @@ node_js:
 cache:
   directories:
     - node_modules
+
+addons:
+  apt_packages:
+    - pandoc

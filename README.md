@@ -38,9 +38,9 @@
 
 ## Description
 
-**GPP** (gitbook-plugin-build) extends [gitbook](https://www.gitbook.com/)
+**GPB** (gitbook-plugin-build) extends [gitbook](https://www.gitbook.com/)
 build system with [pandoc](http://pandoc.org/) converter. Pandoc is your
-swiss-army knife when it comes to coverting files. **GPP** use pandoc
+swiss-army knife when it comes to coverting files. **GPB** use pandoc
 build system to convert and compile your book in variety of formats:
 
 * **TeX formats**: LaTeX, ConTeXt, LaTeX Beamer slides

@@ -1,10 +1,11 @@
 'use strict';
 
-const fs = require('fs');
+/**
+ * @ignore
+ */
 const pdc = require('pdc');
 const ejs = require('ejs');
-const merge = require('merge');
-const pac = require('../package.json');
+const fs = require('fs');
 
 /**
  * Module that hold all hard logic.
@@ -13,28 +14,42 @@ const pac = require('../package.json');
  */
 
 /**
- * Callback for returning string.
- *
- * @callback returnString
- * @param content {String} Returned content.
- */
-
-/**
- * Constructor. Wraps book instance.
- *
- * @class Helper class which holds most hard logic,
+ * Holds most hard logic,
  * so that plugins methods can be
- * as clean as possible.
+ * as clean as possible. Raps book instance.
+ * @class Helper Main module class.
  */
 class Helper {
 
 	/**
 	 * Helper constructor.
+	 * @constructs Helper
 	 */
 	constructor() {
+		/**
+		 * Get absolute src path.
+		 * @param path
+		 * @member module:helper~Helper#getSrc
+		 */
 		this.getSrc = null;
+
+		/**
+		 * Main plugin configuration.
+		 * @member module:helper~Helper#config
+		 */
 		this.config = null;
+
+		/**
+		 * Gitbook logger.
+		 * @member module:helper~Helper#log
+		 */
 		this.log = null;
+
+		/**
+		 * Gitbook summary.
+		 * @member module:helper~Helper#summary
+		 */
+		this.summary = [];
 	}
 
 	/**
@@ -42,33 +57,58 @@ class Helper {
 	 * @param ctx {Object} `this` plugin object.
 	 */
 	init(ctx) {
-		// Set labels
+		// Sets instance members.
 		this.getSrc = ctx.book.resolve;
 		this.log = ctx.log;
-		this.config = merge.recursive(
-			pac.gitbook,
-			ctx.options.pluginsConfig.build
-		);
+		this.config = ctx.options.pluginsConfig.build;
 	}
 
 	/**
 	 * Get rendered template content.
-	 * @param config {Object} Summary array of articles.
+	 * @param config {Object} Should be in form `{summary: [{content: <String}]}`.
 	 * @returns {String} Rendered content.
 	 */
 	renderTemp(config) {
-		if (fs.existsSync(this.config.template)) {
-			return ejs.render(
-				fs.readFileSync(this.getSrc(this.config.template), 'utf-8'),
-				config
-			);
+		let content;
+		let fileStat;
+		const isTemp = {
+			file: false,
+			dir: false
+		};
+
+		try {
+			fileStat = fs.statSync(this.config.template);
+
+			isTemp.file = fileStat.isFile();
+			isTemp.dir = fileStat.isDirectory();
+		} catch (err) {
+			// On template fail log error.
+			this.log.warn.ln('plugin-build: no template found');
+		}
+
+		if (isTemp.file && !isTemp.dir) {
+			// If template exist render with ejs.
+			const rawContent = fs.readFileSync(this.getSrc(this.config.template), 'utf-8');
+
+			try {
+				content = ejs.render(rawContent, config);
+			} catch (err) {
+				// If template syntax is corrupted throw error.
+				throw new Error(`Template error: ${this.config.template}\n${err.message}`);
+			}
+		} else if (isTemp.dir) {
+			// If template is directory throw error.
+			throw new Error(`Template path is not file: ${this.config.template}`);
 		} else {
-			let content = '';
+			// If template not exist create without templating.
+			content = '';
 			config.summary.forEach((article) => {
 				content += `${article.content}\n`;
 			});
-			return content;
 		}
+
+		// Returns content on the end.
+		return content;
 	}
 
 	/**
@@ -76,29 +116,41 @@ class Helper {
 	 * @returns {String}
 	 */
 	getOutput() {
-		return this.getSrc(this.config.output.path);
+		return this.getSrc(this.config.output);
 	}
 
 	/**
 	 * Compile html string to output format.
-	 * @param html {String} Html string.
-	 * @param {returnString} Callback for compiled content.
+	 * @param html
+	 * @returns {Promise}
 	 */
-	pandocCompile(html, cb) {
+	pandocCompile(html) {
+		// Add standalone flag to pandoc arguments.
 		const args = this.config.args
 			.concat(['--standalone'])
-			.filter((v, i, a) => a.indexOf(v) === i);
+			.filter((v, i, a) => a.indexOf(v) === i)
+			.sort();
 
-		pdc(html,
-			'html',
-			this.config.output.format,
+		// Logs compile configuration.
+		this.log.debug.ln('plugin-build(compile):', JSON.stringify({
 			args,
-			this.config.opts,
-			(err, result) => {
-				if (err) return cb(err);
+			config: this.config
+		}, null, 2));
 
-				cb(null, result);
-			});
+		return new Promise((resolve, reject) => {
+			// Compile html string.
+			pdc(html,
+				'html',
+				this.config.format,
+				args,
+				this.config.opts,
+				(err, result) => {
+					if (err) reject(err);
+
+					// Call callback with (err, result).
+					resolve(result);
+				});
+		});
 	}
 }
 

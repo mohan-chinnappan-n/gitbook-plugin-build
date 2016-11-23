@@ -1,4 +1,4 @@
-![Project logo](docs/media/header.png?raw=true)
+![Project logo](https://github.com/urosjarc/gitbook-plugin-build/blob/develop/docs/media/header.png?raw=true)
 
 <br>
 
@@ -19,7 +19,7 @@
 [npm-url]: https://www.npmjs.com/package/gitbook-plugin-build
 [travis]: https://img.shields.io/travis/urosjarc/gitbook-plugin-build.svg
 [travis-url]: https://travis-ci.org/urosjarc/gitbook-plugin-build
-[coverage]: https://img.shields.io/codacy/coverage/574f24efb20948afac9ba998f3d159c3.svg
+[coverage]: https://img.shields.io/codacy/coverage/27e38bb72bdc4476b2e87e9926df0485.svg
 [coverage-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build
 [codestyle]: https://img.shields.io/codacy/grade/27e38bb72bdc4476b2e87e9926df0485.svg
 [codestyle-url]: https://www.codacy.com/app/urosjarc/gitbook-plugin-build
@@ -38,9 +38,9 @@
 
 ## Description
 
-**GPP** (gitbook-plugin-build) extends [gitbook](https://www.gitbook.com/)
+**GPB** (gitbook-plugin-build) extends [gitbook](https://www.gitbook.com/)
 build system with [pandoc](http://pandoc.org/) converter. Pandoc is your
-swiss-army knife when it comes to coverting files. **GPP** use pandoc
+swiss-army knife when it comes to coverting files. **GPB** use pandoc
 build system to convert and compile your book in variety of formats:
 
 * **TeX formats**: LaTeX, ConTeXt, LaTeX Beamer slides

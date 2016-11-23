@@ -1,0 +1,13 @@
+{
+	"name": "application-name",
+	"version": "0.0.1",
+	"scripts": {
+		"book-build": "gitbook build --log=debug",
+		"book-plugin": "gitbook build --plugin-build --log=debug",
+		"book-format": "gitbook build --plugin-build=html --log=debug"
+	},
+	"dependencies": {
+		"gitbook-cli": "^2.3.0",
+		"gitbook-plugin-build": "file:../../.."
+	}
+}

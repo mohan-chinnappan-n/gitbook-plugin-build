@@ -1,8 +1,8 @@
 /*
-    eslint-disable no-var, import/no-extraneous-dependencies,
-    object-shorthand, func-names, vars-on-top,
-    prefer-arrow-callback, prefer-template
-*/
+ eslint-disable no-var, import/no-extraneous-dependencies,
+ object-shorthand, func-names, vars-on-top,
+ prefer-arrow-callback, prefer-template
+ */
 
 'use strict';
 
@@ -46,7 +46,7 @@ exports.handlers = {
 
 			// Set new description if commentsArr is full
 			if (commentsArr.length > 0) {
-				description += '\n<b>Specs:</b>\n<ol>\n';
+				description += '\n<br><b>Specs:</b>\n<ol>\n';
 				for (var k = 0; k < commentsArr.length; k += 1) {
 					description += '<li>' + commentsArr[k] + '</li>\n';
 				}

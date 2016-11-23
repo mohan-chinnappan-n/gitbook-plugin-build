@@ -1,9 +1,9 @@
-I would love for you to contribute to our source code and to make **GPP** even better than it is
+I would love for you to contribute to our source code and to make **GPB** even better than it is
 today! Here are the guidelines for you to follow...
 
 ## Got a Question?
 
-If you have questions about how to use **GPP**, please create new issue
+If you have questions about how to use **GPB**, please create new issue
 in which you point out which section of documentation is lacking with information.
 
 ## Found an Issue?
@@ -36,41 +36,34 @@ Before you submit your issue search the archive, maybe your question was already
 If your issue appears to be a bug, and hasn't been reported, open a new issue. Help to maximize
 the effort on fixing issues and adding new features, by not reporting duplicate issues.
 Providing the following information will increase the chances of your issue being dealt with
-quickly:
-
-* **Overview of the Issue** - if an error is being thrown a non-minified stack trace helps
-* **Debug log file** - Use `gitbook build --debug` to create debug log file.
-* **Motivation for or Use Case** - explain why this is a bug for you.
-* **Related Issues** - has a similar issue been reported before?
-* **Suggest a Fix** - if you can't fix the bug yourself, perhaps you can point to what might be
-  causing the problem (line of code or commit)
+quickly.
 
 **If you get help, help others. Good karma rulez!**
 
 ## Submitting a Pull Request
 Before you submit your pull request consider the following guidelines:
 
-* Search [GitHub](https://github.com/urosjarc/gitbook-plugin-build/pulls) for an open or closed Pull Request
+* Search [GitHub Repository][github] for an open or closed Pull Request
   that relates to your submission. You don't want to duplicate effort.
 * Make your changes in a new git branch:
 
-    ```
-    git checkout -b my-fix-branch master
-    ```
+```shell
+git checkout -b my-fix-branch master
+```
 
 * Create your patch, **including appropriate test cases**.
 * Run test suite. and ensure that all tests pass.
 
-    ```
-    npm test
-    ```
+```shell
+npm test
+```
 
 * Commit your changes using a descriptive commit message.
 * Push your branch to GitHub:
 
-    ```
-    git push origin my-fix-branch
-    ```
+```shell
+git push origin my-fix-branch
+```
 
 In GitHub, send a pull request to `gitbook-plugin-build:master`.
 
@@ -80,7 +73,7 @@ That's it! Thank you for your contribution!
 
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
-* All features or bug fixes **must be tested** by one or more [specs][unit-testing].
+* All features or bug fixes **must be tested** by one or more tests.
 * All public API methods **must be documented** with jsdoc3.
 * Use our set of linting rules.
 

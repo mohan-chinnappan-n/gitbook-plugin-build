@@ -152,7 +152,7 @@
         <strong>
           gitbook-plugin-build
           <span class="version">
-            0.0.5
+            0.1.0
           </span>
         </strong>
         
@@ -168,7 +168,7 @@
         <ul class="repo">
           <li class="repo-download">
             
-            <a href="https://github.com/urosjarc/gitbook-plugin-build/archive/0.0.5.zip" target="_blank" title="Download" data-action="download">
+            <a href="https://github.com/urosjarc/gitbook-plugin-build/archive/0.1.0.zip" target="_blank" title="Download" data-action="download">
               <i class="icon icon-download"></i> Download
             </a>
           </li>
@@ -312,22 +312,22 @@
 </ul>
 <h2 id="plugin-setup">Plugin setup<a class="headerlink" href="#plugin-setup" title="Permanent link">#</a></h2>
 <ul>
-<li>Add <strong>GPP</strong> plugin to <code>(book.json).plugins</code> array, see gitbook <a href="https://toolchain.gitbook.com/plugins">info about plugins</a>.</li>
-<li>Add <strong>GPP</strong> configuration to <code>(book.json).pluginsConfig.build</code> object, or leave it empty to use default configuration.</li>
+<li>Add <strong>GPB</strong> plugin to <code>(book.json).plugins</code> array, see gitbook <a href="https://toolchain.gitbook.com/plugins">info about plugins</a>.</li>
+<li>Add <strong>GPB</strong> configuration to <code>(book.json).pluginsConfig.build</code> object, or leave it empty to use default configuration.</li>
 <li>Default configuration is located <a href="https://plugins.gitbook.com/plugin/build">here at the bottom</a>.</li>
 <li>Install gitbook plugins by running <code>gitbook install</code>.</li>
 <li>To se which formats pandoc provides check <code>man pandoc</code>.</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h2>
-<p>Add <code>--plugin-build</code> flag to you gitbook command to start <strong>GPP</strong> build.
-<strong>GPP</strong> will create output file base on <a href="https://toolchain.gitbook.com/pages.html">gitbook summary file</a>...</p>
-<div class="code"><pre><span></span>gitbook serve --plugin-build
-gitbook build --plugin-build
+<p>Add <code>--plugin-build</code> flag to you gitbook command to start <strong>GPB</strong> build.
+<strong>GPB</strong> will create output file base on <a href="https://toolchain.gitbook.com/pages.html">gitbook summary file</a>...</p>
+<div class="code"><pre><span></span>gitbook serve --plugin-build<span class="o">=</span>latex // Ovveride config.format
+gitbook build --plugin-build       // Use default config.format
 </pre></div>
 
 
 <h2 id="template">Template<a class="headerlink" href="#template" title="Permanent link">#</a></h2>
-<p>If you don't like how <strong>GPP</strong> creates output file you can setup custom
+<p>If you don't like how <strong>GPB</strong> creates output file you can setup custom
 template which will follow your rules for compiling output file.</p>
 <ul>
 <li>Create file on path <code>(book.json).pluginsConfig.build.template</code>.</li>

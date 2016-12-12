@@ -85,7 +85,7 @@
 		"assert": "^1.4.1",
 		"browser-sync": "^2.16.0",
 		"eslint": "^3.1.1",
-		"eslint-config-airbnb-base": "^10.0.1",
+		"eslint-config-airbnb-base": "^11.0.0",
 		"eslint-plugin-import": "^2.1.0",
 		"gulp": "^3.9.0",
 		"gulp-check-deps": "^1.4.1",
